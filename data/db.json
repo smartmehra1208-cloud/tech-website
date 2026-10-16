@@ -1,0 +1,389 @@
+{
+  "settings": {
+    "companyName": "KioraTech",
+    "tagline": "We Build, You Rule.",
+    "phone": "+91 92194 61302",
+    "whatsapp": "919219461302",
+    "email": "kioratech12@gmail.com",
+    "address": "D-463, LDA Colony, Near Spring Dale College, Kanpur Road, Lucknow - 226012, UP",
+    "instagram": "https://www.instagram.com/kiora.tech/#",
+    "instagramHandle": "@kiora.tech",
+    "adminPassword": "admin123",
+    "established": "2024",
+    "projectsCompleted": 180,
+    "happyClients": 95,
+    "productsListed": "500K+",
+    "supportHours": "24/7"
+  },
+  "projects": [
+    {
+      "id": "proj-live-1",
+      "title": "Organic Sanjeevani Roots — 100% Pure Herbal & Ayurvedic Superfoods D2C Store",
+      "category": "web",
+      "categoryLabel": "Live Client Website",
+      "client": "Organic Sanjeevani Roots (Lucknow)",
+      "description": "100% Pure Herbal & Ayurvedic Superfoods D2C web storefront. Features sub-second mobile loading, direct WhatsApp 1-click checkout, complete product catalog (Moringa powder, Himalayan Sea Buckthorn juice, Ashwagandha roots, Desi Ghee cookies), and rich Ayurvedic schema SEO.",
+      "result": "Sub-1s Mobile Speed & Instant WhatsApp Ordering",
+      "tags": [
+        "Live Client Website",
+        "Ayurvedic D2C Store",
+        "WhatsApp Checkout",
+        "Speed 99+",
+        "Schema SEO"
+      ],
+      "liveUrl": "https://organicsanjeevaniroots.com/",
+      "featured": true,
+      "image": "https://www.organicsanjeevaniroots.com/images/moringa-powder-front.jpg",
+      "caseStudy": {
+        "problem": "Client needed a clean, chemical-free herbal superfoods storefront with instant mobile purchasing and zero technical bloat for their Lucknow wellness brand.",
+        "solution": "Built a custom lightweight responsive web store with zero render-blocking assets, streamlined 1-click WhatsApp order integration, and rich Ayurvedic wellness schema markup.",
+        "metrics": [
+          "Sub-1 second page load speed across mobile devices",
+          "Direct WhatsApp inquiries and order conversions",
+          "100% Google SEO indexing with verified rich snippets"
+        ]
+      }
+    },
+    {
+      "id": "proj-live-2",
+      "title": "Kiyan Export — Global B2B Herbal Manufacturer & Bulk Exporter (Est. 2014)",
+      "category": "web",
+      "categoryLabel": "Live Client Website",
+      "client": "Kiyan Export & Herbal Manufacturing",
+      "description": "Enterprise wholesale manufacturing & bulk export portal for certified organic Shilajit, Ashwagandha, and botanical extracts. Features tiered volume discounts, Google Ads conversion tracking, automated RFQ inquiry engine, and international buyer catalog.",
+      "result": "High-Converting Global B2B Export Portal",
+      "tags": [
+        "Live Client Website",
+        "B2B Export Portal",
+        "Google Ads Conversion",
+        "OEM Private Label",
+        "Fast Loading"
+      ],
+      "liveUrl": "https://kiyanexports.com/",
+      "featured": true,
+      "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+      "caseStudy": {
+        "problem": "Established exporter needed a high-credibility international B2B digital portal to attract foreign importers from USA, Europe & UAE and handle bulk OEM private label inquiries.",
+        "solution": "Engineered a robust, fast-loading B2B export website with tiered wholesale pricing specs, ISO/GMP certification trust badges, automated quote request forms, and Google Ads call tracking.",
+        "metrics": [
+          "International bulk buyer inquiries generated from USA, UAE & Europe",
+          "Integrated Google Ads call and form conversion tracking",
+          "Tiered wholesale price calculation and instant RFQ system"
+        ]
+      }
+    },
+    {
+      "id": "proj-live-3",
+      "title": "Shopify D2C Store — Custom Theme & High-Converting Checkout",
+      "category": "web",
+      "categoryLabel": "Shopify & E-Commerce",
+      "client": "Aura Lifestyle D2C Brand",
+      "description": "Custom Shopify storefront designed and developed from scratch. Features Liquid theme customization, Razorpay payment gateway integration, automated abandoned cart recovery, mobile-first product filters, and 1.2s checkout speed.",
+      "result": "+340% Mobile Checkout Conversions",
+      "tags": [
+        "Shopify Plus",
+        "Liquid Customization",
+        "Razorpay Gateway",
+        "Mobile-First UX",
+        "Abandoned Cart Engine"
+      ],
+      "liveUrl": "https://organicsanjeevaniroots.com/",
+      "featured": true,
+      "image": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80",
+      "caseStudy": {
+        "problem": "Client experienced high checkout drop-offs and poor mobile navigation on standard Shopify templates.",
+        "solution": "Engineered a bespoke lightweight Shopify theme with custom product variants, 1-click buy, and automated WhatsApp order alerts.",
+        "metrics": [
+          "Checkout abandonment dropped by 42%",
+          "Page speed increased by 3.5x",
+          "₹48 Lakhs monthly sales achieved in 4 months"
+        ]
+      }
+    },
+    {
+      "id": "proj-live-4",
+      "title": "FastTrack Cargo — Enterprise Consignment & Tracking Portal",
+      "category": "web",
+      "categoryLabel": "Custom Web Portal",
+      "client": "FastTrack Cargo Solutions",
+      "description": "Custom enterprise portal with client consignment dashboard, real-time shipment status, automated WhatsApp delivery alerts, and billing automation.",
+      "result": "Automated 8,000+ Monthly Shipments",
+      "tags": [
+        "Node.js / React",
+        "Live WebSockets",
+        "WhatsApp API",
+        "Invoice Automation"
+      ],
+      "liveUrl": "https://kiyanexports.com/",
+      "featured": false,
+      "image": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80",
+      "caseStudy": {
+        "problem": "Manual phone calls for order tracking overwhelmed support staff.",
+        "solution": "Built automated self-serve customer tracking portal with automated WhatsApp notifications.",
+        "metrics": [
+          "Customer support calls reduced by 75%",
+          "Order processing time cut from 25m to 2m",
+          "100% digital proof-of-delivery"
+        ]
+      }
+    },
+    {
+      "id": "proj-live-5",
+      "title": "SmilePro Healthcare — High-Speed Local Clinic Platform",
+      "category": "web",
+      "categoryLabel": "Clinic & Booking Portal",
+      "client": "SmilePro Healthcare Clinics",
+      "description": "High-performance clinic website with online appointment booking, doctor profiles, patient testimonials, and local Google SEO schema.",
+      "result": "600+ Monthly Appointment Inquiries",
+      "tags": [
+        "Appointment Booking",
+        "Local SEO Schema",
+        "Speed 98+",
+        "Mobile Responsive"
+      ],
+      "liveUrl": "https://organicsanjeevaniroots.com/",
+      "featured": false,
+      "image": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80",
+      "caseStudy": {
+        "problem": "Clinic had low digital appointments and high patient acquisition costs.",
+        "solution": "Built a clean, mobile-first appointment booking system with WhatsApp instant confirmations.",
+        "metrics": [
+          "620+ calls and online bookings per month",
+          "Sub-1.5 second page load speed on 4G networks",
+          "Zero downtime with 99.9% uptime reliability"
+        ]
+      }
+    },
+    {
+      "id": "proj-live-6",
+      "title": "Fusion Bistro & Cafe — Digital QR Menu & Brand Platform",
+      "category": "web",
+      "categoryLabel": "Restaurant & QR Platform",
+      "client": "Fusion Bistro Chain",
+      "description": "Interactive restaurant website with digital interactive QR menu, table reservation system, Instagram integration, and customer reviews.",
+      "result": "220% Growth in Table Reservations",
+      "tags": [
+        "Digital QR Menu",
+        "Table Booking System",
+        "Instagram Feed",
+        "Mobile Optimized"
+      ],
+      "liveUrl": "https://organicsanjeevaniroots.com/",
+      "featured": false,
+      "image": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80",
+      "caseStudy": {
+        "problem": "Restaurant needed a digital interactive menu to reduce printing costs and accept online table reservations.",
+        "solution": "Built a modern QR-code powered digital menu with visual food photos and instant WhatsApp reservations.",
+        "metrics": [
+          "Table reservations increased by 220%",
+          "Zero printing costs with instant digital menu updates",
+          "Over 10,000 QR scans in the first 60 days"
+        ]
+      }
+    }
+  ],
+  "catalog": [
+    {
+      "id": "cat-1",
+      "name": "Starter Website Package",
+      "category": "Web Design",
+      "price": 14999,
+      "billingType": "One-time",
+      "badge": "Startup Special",
+      "deliveryDays": "4 - 7 Days",
+      "description": "Perfect for startups, consultants, and local businesses needing a clean, mobile-optimized professional online presence.",
+      "features": [
+        "1 to 5 Fully Responsive Custom Pages",
+        "High-Speed Mobile & Desktop UI (Sub-1.5s Load)",
+        "WhatsApp Direct Chat Button Integration",
+        "Interactive Lead Contact Form with Email Alert",
+        "Free SSL Certificate & Cloudflare Security Setup",
+        "Basic On-Page SEO & Google Search Console indexing",
+        "1 Year Free Domain & Hosting Consultation",
+        "30 Days Free Post-Launch Dedicated Support"
+      ]
+    },
+    {
+      "id": "cat-2",
+      "name": "Business Growth Website",
+      "category": "Web Design",
+      "price": 29999,
+      "billingType": "One-time",
+      "badge": "Most Popular",
+      "deliveryDays": "7 - 10 Days",
+      "description": "Complete modern animated business website engineered to capture leads and showcase services with interactive features.",
+      "features": [
+        "Up to 10 Custom Designed Pages",
+        "Sleek Glassmorphic 3D & Micro-Animations",
+        "Dynamic Portfolio & Live Projects Showcase",
+        "Google Analytics 4 & Meta Pixel Setup",
+        "Advanced SEO Architecture & Speed 95+",
+        "Interactive Quotation / Cost Estimator",
+        "Multi-language (English + Hindi) Support",
+        "60 Days Dedicated Support & Maintenance"
+      ]
+    },
+    {
+      "id": "cat-3",
+      "name": "Shopify D2C Store Setup & Launch",
+      "category": "Shopify & E-Commerce",
+      "price": 34999,
+      "billingType": "One-time",
+      "badge": "Trending D2C",
+      "deliveryDays": "7 - 10 Days",
+      "description": "Complete Shopify store setup and design for modern direct-to-consumer brands. High-converting checkout, payment gateways, and inventory setup.",
+      "features": [
+        "Complete Shopify Store Setup & Custom Domain",
+        "Premium Theme Customization & Mobile UX",
+        "Payment Gateways: Razorpay, PhonePe, Cashfree & COD",
+        "Cataloging & Product Variant Setup (Up to 30 Products)",
+        "Automated Abandoned Cart Recovery Funnel",
+        "WhatsApp Direct Order Alert & Customer Chat",
+        "Courier Integration (Shiprocket / Delhivery)",
+        "45 Days Dedicated E-Commerce Handholding"
+      ]
+    },
+    {
+      "id": "cat-4",
+      "name": "Custom E-Commerce & Portal",
+      "category": "Web Design",
+      "price": 54999,
+      "billingType": "One-time",
+      "badge": "Enterprise Grade",
+      "deliveryDays": "2 - 3 Weeks",
+      "description": "Full-fledged bespoke D2C E-Commerce store or custom web application with payment gateways, admin portal, and inventory management.",
+      "features": [
+        "Unlimited Products Catalog & Categories",
+        "Razorpay, Stripe & Cash-on-Delivery Setup",
+        "Full Admin CMS & Inventory Dashboard",
+        "Customer Login, Wishlist & Order Tracking",
+        "Automated WhatsApp & Email Order Alerts",
+        "Abandoned Cart Recovery System",
+        "Ultra-Fast CDN & Database Tuning",
+        "Coupons, Discounts & Upsell Engine",
+        "90 Days VIP Priority Maintenance"
+      ]
+    },
+    {
+      "id": "cat-5",
+      "name": "Landing Page for High-ROI Ads",
+      "category": "Web Design",
+      "price": 11999,
+      "billingType": "One-time",
+      "badge": "High Conversion",
+      "deliveryDays": "3 - 5 Days",
+      "description": "High-converting single page funnel designed specifically for Meta (Instagram/Facebook) and Google Ads traffic.",
+      "features": [
+        "1 High-Impact Sales Funnel Landing Page",
+        "A/B Tested Conversion-Optimized Structure",
+        "Direct WhatsApp & Sticky Call Buttons",
+        "Google Ads & Meta Pixel Conversion Events",
+        "Instant Sub-1s Mobile Load Speed",
+        "Form Integration with Google Sheets / Email",
+        "15 Days Free Ad Funnel Optimization"
+      ]
+    },
+    {
+      "id": "cat-6",
+      "name": "Website Revamp & Speed Optimization",
+      "category": "Web Design",
+      "price": 12999,
+      "billingType": "One-time",
+      "badge": "Speed Upgrade",
+      "deliveryDays": "3 - 5 Days",
+      "description": "Transform your slow, outdated website into an ultra-modern, high-speed sales machine with 90+ Google PageSpeed score.",
+      "features": [
+        "Complete UI/UX Redesign with Modern 2026 Layout",
+        "Core Web Vitals & Speed Optimization (Score 90+)",
+        "Mobile Responsiveness Error Rectification",
+        "Image Compression & Next-Gen Format WebP",
+        "Broken Link Fixing & On-Page SEO Overhaul",
+        "30 Days Post-Revamp Warranty"
+      ]
+    }
+  ],
+  "inquiries": [
+    {
+      "id": "inq-691466",
+      "name": "Rajesh Verma",
+      "email": "rajesh@vermaexports.in",
+      "phone": "+91 9988776655",
+      "service": "Custom Web & App Development",
+      "budget": "₹30,000 - ₹60,000",
+      "message": "Need full management and website development for export apparel brand.",
+      "status": "New",
+      "source": "Website Contact Form",
+      "createdAt": "2026-10-12T11:14:51.466Z"
+    },
+    {
+      "id": "inq-101",
+      "name": "Vikas Sharma",
+      "email": "vikas.sharma@modernretail.in",
+      "phone": "+91 98112 34567",
+      "service": "Shopify D2C Store",
+      "budget": "₹30,000 - ₹50,000",
+      "message": "We manufacture home decor items and want to launch our own D2C Shopify store with payment gateway and WhatsApp alerts.",
+      "status": "In Progress",
+      "source": "Website Contact Form",
+      "createdAt": "2026-10-10T14:20:00.000Z"
+    },
+    {
+      "id": "inq-102",
+      "name": "Pooja Malhotra",
+      "email": "pooja@malhotracare.com",
+      "phone": "+91 97180 98765",
+      "service": "Business Growth Website",
+      "budget": "₹30,000 - ₹45,000",
+      "message": "Looking for a high-end luxury clinic website with online booking and WhatsApp connect in Lucknow.",
+      "status": "New",
+      "source": "Interactive Quote Calculator",
+      "createdAt": "2026-10-12T09:45:00.000Z"
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "test-live-1",
+      "name": "Harshita Singh",
+      "role": "Founder & Ayurvedic Specialist",
+      "company": "Organic Sanjeevani Roots (organicsanjeevaniroots.com)",
+      "rating": 5,
+      "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80",
+      "text": "KioraTech ne hamari D2C website organicsanjeevaniroots.com banayi. Website ka look aur mobile speed bohot lajawab hai. Client direct website par aakar 1-click mein WhatsApp par order place kar rahe hain. Delivery bhi time par mili!",
+      "verified": true,
+      "projectCategory": "Live E-Commerce Website"
+    },
+    {
+      "id": "test-live-2",
+      "name": "Abhishek Srivastava",
+      "role": "Director & Head of Exports",
+      "company": "Kiyan Export & Herbal Manufacturing (kiyanexports.com)",
+      "rating": 5,
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
+      "text": "KioraTech engineered our international B2B export portal kiyanexports.com with Google Ads call conversion and wholesale inquiry forms. Overseas buyers from USA and UAE can now easily submit RFQs. Highly reliable team!",
+      "verified": true,
+      "projectCategory": "Live B2B Export Portal"
+    },
+    {
+      "id": "test-3",
+      "name": "Amit Vardhan",
+      "role": "Managing Director",
+      "company": "FastLogix Cargo Solutions",
+      "rating": 5,
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80",
+      "text": "The custom logistics web portal KioraTech built for us is world-class. It automated our entire consignment tracking and reduced customer calls by 75%. Inka communication aur delivery timeline 100% on point tha.",
+      "verified": true,
+      "projectCategory": "Custom Web Portal"
+    },
+    {
+      "id": "test-4",
+      "name": "Neha Kapoor",
+      "role": "Creative Director",
+      "company": "Aura Luxe Boutique",
+      "rating": 5,
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
+      "text": "Hamara Shopify store KioraTech ne setup kiya. Razorpay checkout aur abandoned cart automated messages setup hone ke baad hamari monthly sales 3x badh gayi! Highly recommended for all Shopify brands.",
+      "verified": true,
+      "projectCategory": "Shopify D2C Store"
+    }
+  ]
+}

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KioraTech — Server Admin CMS & Control Center</title>
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <!-- Authentication Login Gate -->
+  <div class="auth-screen" id="auth-screen">
+    <div class="auth-box">
+      <img src="images/logo.png" alt="KioraTech">
+      <h2>Server Admin Access</h2>
+      <p>Enter your administrator passcode to manage projects, services catalog, and incoming customer leads.</p>
+      
+      <form id="admin-login-form">
+        <input type="password" id="admin-pass-input" placeholder="Passcode (Default: admin123)" required autofocus>
+        <button type="submit" class="btn-admin btn-admin-primary" style="width: 100%; justify-content: center; padding: 12px;">
+          Unlock CMS Dashboard 🔓
+        </button>
+      </form>
+      <div style="font-size: 0.78rem; color: var(--admin-muted); margin-top: 18px;">
+        💡 Default Passcode is <code>admin123</code>. You can change this in Settings.
+      </div>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <aside class="admin-sidebar">
+    <div>
+      <div class="admin-brand">
+        <img src="images/logo.png" alt="Logo">
+        <div>
+          <div class="brand-name">Kiora<span>Tech</span> <span class="cms-pill">CMS</span></div>
+        </div>
+      </div>
+
+      <ul class="admin-nav">
+        <li class="admin-nav-item active" data-tab="dashboard">
+          <i>📊</i> <span>Dashboard</span>
+        </li>
+        <li class="admin-nav-item" data-tab="projects">
+          <i>💼</i> <span>Projects & Work</span>
+        </li>
+        <li class="admin-nav-item" data-tab="catalog">
+          <i>📦</i> <span>Services Catalog</span>
+        </li>
+        <li class="admin-nav-item" data-tab="inquiries">
+          <i>💬</i> <span>Leads & Inquiries</span>
+          <span class="admin-nav-badge" id="inquiries-badge">0</span>
+        </li>
+        <li class="admin-nav-item" data-tab="testimonials">
+          <i>⭐</i> <span>Client Reviews</span>
+        </li>
+        <li class="admin-nav-item" data-tab="settings">
+          <i>⚙️</i> <span>Site & WhatsApp</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="admin-sidebar-footer">
+      <a href="/" target="_blank" class="btn-view-site">
+        <span>🌐 Open Live Website</span> <i>↗</i>
+      </a>
+      <button class="btn-logout" onclick="logout()">🔒 Log Out of Admin</button>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="admin-main">
+    <header class="admin-header">
+      <div class="admin-title-wrap">
+        <h1 id="admin-page-title">Overview & Statistics</h1>
+        <p>Live management of KioraTech server database (`data/db.json`)</p>
+      </div>
+
+      <div class="admin-header-actions">
+        <button class="btn-admin btn-admin-secondary" onclick="openAddProjectModal()">+ New Project</button>
+        <button class="btn-admin btn-admin-primary" onclick="openAddCatalogModal()">+ New Package</button>
+      </div>
+    </header>
+
+    <!-- KPI Summary Grid -->
+    <div class="admin-kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-title">Total Projects</div>
+        <div class="kpi-value" id="kpi-projects">0</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">Catalog Packages</div>
+        <div class="kpi-value" id="kpi-catalog">0</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">Total Customer Leads</div>
+        <div class="kpi-value" id="kpi-inquiries">0</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">Client Reviews</div>
+        <div class="kpi-value" id="kpi-testimonials">0</div>
+      </div>
+    </div>
+
+    <!-- ================= TAB 1: DASHBOARD ================= -->
+    <div class="admin-tab-pane active" id="tab-dashboard">
+      <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px;">
+        <div class="admin-table-wrap">
+          <div style="padding: 18px 20px; font-weight: 700; border-bottom: 1px solid var(--admin-card-border); display: flex; justify-content: space-between; align-items: center;">
+            <span>Recent Inbound Leads</span>
+            <button class="btn-admin btn-admin-secondary" onclick="document.querySelector('[data-tab=inquiries]').click()">View All Leads →</button>
+          </div>
+          <div id="recent-leads-list">
+            <!-- Injected via admin.js -->
+          </div>
+        </div>
+
+        <div style="background: var(--admin-card); border: 1px solid var(--admin-card-border); border-radius: var(--radius-md); padding: 24px;">
+          <h3 style="font-size: 1.15rem; margin-bottom: 12px;">Quick Shortcuts</h3>
+          <p style="color: var(--admin-muted); font-size: 0.88rem; margin-bottom: 20px;">
+            Common administrative tasks for updating KioraTech's live site.
+          </p>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <button class="btn-admin btn-admin-primary" onclick="openAddProjectModal()">+ Add New Case Study / Project</button>
+            <button class="btn-admin btn-admin-secondary" onclick="openAddCatalogModal()">+ Add New Catalog Pricing Tier</button>
+            <button class="btn-admin btn-admin-secondary" onclick="openAddTestimonialModal()">+ Add Client Testimonial</button>
+            <button class="btn-admin btn-admin-secondary" onclick="document.querySelector('[data-tab=settings]').click()">⚙️ Update WhatsApp & Phone Numbers</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= TAB 2: PROJECTS ================= -->
+    <div class="admin-tab-pane" id="tab-projects">
+      <div class="admin-table-wrap">
+        <div style="padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--admin-card-border);">
+          <strong style="font-size: 1.05rem;">All Portfolio Projects</strong>
+          <button class="btn-admin btn-admin-primary" onclick="openAddProjectModal()">+ Add New Project</button>
+        </div>
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Project & Client</th>
+              <th>Category</th>
+              <th>Key Result</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="projects-table-body">
+            <!-- Hydrated by admin.js -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ================= TAB 3: CATALOG ================= -->
+    <div class="admin-tab-pane" id="tab-catalog">
+      <div class="admin-table-wrap">
+        <div style="padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--admin-card-border);">
+          <strong style="font-size: 1.05rem;">Services Catalog & Pricing Packages</strong>
+          <button class="btn-admin btn-admin-primary" onclick="openAddCatalogModal()">+ Add New Package</button>
+        </div>
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Package Name</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Turnaround</th>
+              <th>Features</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="catalog-table-body">
+            <!-- Hydrated by admin.js -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ================= TAB 4: INQUIRIES & LEADS ================= -->
+    <div class="admin-tab-pane" id="tab-inquiries">
+      <div class="admin-table-wrap">
+        <div style="padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--admin-card-border);">
+          <strong style="font-size: 1.05rem;">Customer Leads & Quotation Submissions</strong>
+          <span style="font-size: 0.82rem; color: var(--admin-muted);">Direct from Contact Form, Calculator & KioraBot</span>
+        </div>
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Name & Date</th>
+              <th>Phone & Email</th>
+              <th>Service</th>
+              <th>Budget</th>
+              <th>Message</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="inquiries-table-body">
+            <!-- Hydrated by admin.js -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ================= TAB 5: TESTIMONIALS ================= -->
+    <div class="admin-tab-pane" id="tab-testimonials">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
+        <strong style="font-size: 1.1rem;">Verified Client Reviews</strong>
+        <button class="btn-admin btn-admin-primary" onclick="openAddTestimonialModal()">+ Add New Review</button>
+      </div>
+      <div id="testimonials-admin-list">
+        <!-- Hydrated by admin.js -->
+      </div>
+    </div>
+
+    <!-- ================= TAB 6: SETTINGS ================= -->
+    <div class="admin-tab-pane" id="tab-settings">
+      <div style="background: var(--admin-card); border: 1px solid var(--admin-card-border); border-radius: var(--radius-md); padding: 32px; max-width: 780px;">
+        <h3 style="font-size: 1.3rem; margin-bottom: 6px;">Website & Contact Configuration</h3>
+        <p style="color: var(--admin-muted); font-size: 0.88rem; margin-bottom: 24px;">
+          Updating these values updates all WhatsApp buttons, phone numbers, and counters across the entire website instantly.
+        </p>
+
+        <form onsubmit="saveSettings(event)">
+          <div class="admin-form-row">
+            <div class="admin-form-group">
+              <label class="admin-form-label">Company Brand Name</label>
+              <input type="text" id="set-company-name" class="admin-form-input" required>
+            </div>
+            <div class="admin-form-group">
+              <label class="admin-form-label">WhatsApp Number (e.g. 919219461302)</label>
+              <input type="text" id="set-whatsapp" class="admin-form-input" placeholder="919219461302" required>
+            </div>
+          </div>
+
+          <div class="admin-form-row">
+            <div class="admin-form-group">
+              <label class="admin-form-label">Display Phone Number</label>
+              <input type="text" id="set-phone" class="admin-form-input" placeholder="+91 92194 61302">
+            </div>
+            <div class="admin-form-group">
+              <label class="admin-form-label">Official Inquiries Email</label>
+              <input type="email" id="set-email" class="admin-form-input" placeholder="kioratech12@gmail.com">
+            </div>
+          </div>
+
+          <div class="admin-form-group">
+            <label class="admin-form-label">Office Address / Location</label>
+            <input type="text" id="set-address" class="admin-form-input" placeholder="D-463, LDA Colony, Near Spring Dale College, Kanpur Road, Lucknow - 226012, UP">
+          </div>
+
+          <div class="admin-form-row">
+            <div class="admin-form-group">
+              <label class="admin-form-label">Projects Completed Counter</label>
+              <input type="number" id="set-projects-done" class="admin-form-input">
+            </div>
+            <div class="admin-form-group">
+              <label class="admin-form-label">Happy Clients Counter</label>
+              <input type="number" id="set-happy-clients" class="admin-form-input">
+            </div>
+          </div>
+
+          <div class="admin-form-group" style="border-top: 1px solid var(--admin-card-border); padding-top: 18px; margin-top: 18px;">
+            <label class="admin-form-label">Change Admin Passcode (Leave blank to keep current)</label>
+            <input type="password" id="set-admin-pass" class="admin-form-input" placeholder="Enter new passcode (e.g. secret2026)">
+          </div>
+
+          <div style="margin-top: 24px;">
+            <button type="submit" class="btn-admin btn-admin-primary" style="padding: 12px 28px;">
+              💾 Save & Apply Settings Live
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- ================= PROJECT CRUD MODAL ================= -->
+  <div class="admin-modal-overlay" id="project-crud-modal">
+    <div class="admin-modal-box">
+      <div class="admin-modal-header">
+        <h3 id="proj-modal-title">Add New Project</h3>
+        <button class="admin-modal-close" onclick="closeProjectCrudModal()">✕</button>
+      </div>
+
+      <form id="project-crud-form" onsubmit="saveProjectForm(event)">
+        <input type="hidden" id="proj-form-id">
+
+        <div class="admin-form-row">
+          <div class="admin-form-group">
+            <label class="admin-form-label">Project Title *</label>
+            <input type="text" id="proj-form-title" class="admin-form-input" placeholder="e.g. Aura Luxe Fashion Store" required>
+          </div>
+          <div class="admin-form-group">
+            <label class="admin-form-label">Client / Brand Name</label>
+            <input type="text" id="proj-form-client" class="admin-form-input" placeholder="e.g. Aura Lifestyle India">
+          </div>
+        </div>
+
+        <div class="admin-form-row">
+          <div class="admin-form-group">
+            <label class="admin-form-label">Category Filter Key *</label>
+            <select id="proj-form-category" class="admin-form-select">
+              <option value="web">Web & Apps (web)</option>
+              <option value="marketplace">Amazon & Flipkart (marketplace)</option>
+              <option value="seo">SEO & Growth (seo)</option>
+              <option value="social">Social & Branding (social)</option>
+            </select>
+          </div>
+          <div class="admin-form-group">
+            <label class="admin-form-label">Category Label on Badge</label>
+            <input type="text" id="proj-form-label" class="admin-form-input" placeholder="e.g. D2C E-Commerce">
+          </div>
+        </div>
+
+        <div class="admin-form-row">
+          <div class="admin-form-group">
+            <label class="admin-form-label">Key Metric / Result Badge</label>
+            <input type="text" id="proj-form-result" class="admin-form-input" placeholder="e.g. +340% Conversions, #1 Google Rank">
+          </div>
+          <div class="admin-form-group">
+            <label class="admin-form-label">Live Demo / Case Study Link</label>
+            <input type="text" id="proj-form-live" class="admin-form-input" placeholder="https://example.com or #">
+          </div>
+        </div>
+
+        <div class="admin-form-group">
+          <label class="admin-form-label">Short Description *</label>
+          <textarea id="proj-form-desc" class="admin-form-textarea" rows="2" placeholder="Brief summary displayed on project card..." required></textarea>
+        </div>
+
+        <div class="admin-form-group">
+          <label class="admin-form-label">Technologies / Tags (comma separated)</label>
+          <input type="text" id="proj-form-tags" class="admin-form-input" placeholder="e.g. Shopify, Next.js, Razorpay, Speed 99+">
+        </div>
+
+        <!-- Image: either URL or file upload -->
+        <div class="admin-form-row">
+          <div class="admin-form-group">
+            <label class="admin-form-label">Image URL</label>
+            <input type="text" id="proj-form-image" class="admin-form-input" placeholder="https://images.unsplash.com/...">
+          </div>
+          <div class="admin-form-group">
+            <label class="admin-form-label">Or Upload Image File</label>
+            <input type="file" id="proj-form-file" class="admin-form-input" accept="image/*">
+          </div>
+        </div>
+
+        <!-- Case Study Details -->
+        <div style="background: #090e17; padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--admin-card-border); margin-bottom: 18px;">
+          <h4 style="font-size: 0.92rem; color: var(--teal-400); margin-bottom: 12px;">Case Study Modal Details</h4>
+          
+          <div class="admin-form-group">
+            <label class="admin-form-label">Client Problem / Challenge</label>
+            <input type="text" id="proj-form-problem" class="admin-form-input" placeholder="What difficulty was client facing?">
+          </div>
+
+          <div class="admin-form-group">
+            <label class="admin-form-label">KioraTech Solution & Strategy</label>
+            <input type="text" id="proj-form-solution" class="admin-form-input" placeholder="How did we solve it?">
+          </div>
+
+          <div class="admin-form-group">
+            <label class="admin-form-label">Impact Metrics (One per line)</label>
+            <textarea id="proj-form-metrics" class="admin-form-textarea" rows="2" placeholder="Page speed increased by 3.5x&#10;Checkout abandonment dropped by 42%"></textarea>
+          </div>
+        </div>
+
+        <div class="admin-form-group" style="display: flex; align-items: center; gap: 8px;">
+          <input type="checkbox" id="proj-form-featured" style="width: 18px; height: 18px;">
+          <label for="proj-form-featured" style="font-size: 0.9rem; cursor: pointer;">Show as Featured Project</label>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 20px;">
+          <button type="button" class="btn-admin btn-admin-secondary" onclick="closeProjectCrudModal()">Cancel</button>
+          <button type="submit" class="btn-admin btn-admin-primary">Save Project</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= CATALOG CRUD MODAL ================= -->
+  <div class="admin-modal-overlay" id="catalog-crud-modal">
+    <div class="admin-modal-box">
+      <div class="admin-modal-header">
+        <h3 id="cat-modal-title">Add Catalog Package</h3>
+        <button class="admin-modal-close" onclick="closeCatalogCrudModal()">✕</button>
+      </div>
+
+      <form id="catalog-crud-form" onsubmit="saveCatalogForm(event)">
+        <input type="hidden" id="cat-form-id">
+
+        <div class="admin-form-row">
+          <div class="admin-form-group">
+            <label class="admin-form-label">Package Name *</label>
+            <input type="text" id="cat-form-name" class="admin-form-input" placeholder="e.g. Business Growth Website" required>
+          </div>
+          <div class="admin-form-group">
+            <label class="admin-form-label">Category</label>
+            <input type="text" id="cat-form-category" class="admin-form-input" placeholder="e.g. Web Design, Marketplace, SEO">
+          </div>
+        </div>
+
+        <div class="admin-form-row">
+          <div class="admin-form-group">
+            <label class="admin-form-label">Price in INR (₹) *</label>
+            <input type="number" id="cat-form-price" class="admin-form-input" placeholder="29999" required>
+          </div>
+          <div class="admin-form-group">
+            <label class="admin-form-label">Billing Type</label>
+            <input type="text" id="cat-form-billing" class="admin-form-input" placeholder="One-time or Per Month">
+          </div>
+        </div>
+
+        <div class="admin-form-row">
+          <div class="admin-form-group">
+            <label class="admin-form-label">Badge Text</label>
+            <input type="text" id="cat-form-badge" class="admin-form-input" placeholder="e.g. Most Popular, High Demand">
+          </div>
+          <div class="admin-form-group">
+            <label class="admin-form-label">Estimated Delivery</label>
+            <input type="text" id="cat-form-days" class="admin-form-input" placeholder="e.g. 5-7 Days, Ongoing Monthly">
+          </div>
+        </div>
+
+        <div class="admin-form-group">
+          <label class="admin-form-label">Package Description</label>
+          <input type="text" id="cat-form-desc" class="admin-form-input" placeholder="Who is this package best suited for?">
+        </div>
+
+        <div class="admin-form-group">
+          <label class="admin-form-label">Features Included (One bullet per line) *</label>
+          <textarea id="cat-form-features" class="admin-form-textarea" rows="5" placeholder="Up to 10 Custom Pages&#10;Google Analytics 4 Setup&#10;Mobile-First UI"></textarea>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 20px;">
+          <button type="button" class="btn-admin btn-admin-secondary" onclick="closeCatalogCrudModal()">Cancel</button>
+          <button type="submit" class="btn-admin btn-admin-primary">Save Package</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= TESTIMONIAL MODAL ================= -->
+  <div class="admin-modal-overlay" id="test-modal">
+    <div class="admin-modal-box" style="max-width: 520px;">
+      <div class="admin-modal-header">
+        <h3>Add Client Review</h3>
+        <button class="admin-modal-close" onclick="closeTestModal()">✕</button>
+      </div>
+
+      <form onsubmit="saveTestimonialForm(event)">
+        <div class="admin-form-group">
+          <label class="admin-form-label">Client Name *</label>
+          <input type="text" id="test-form-name" class="admin-form-input" required>
+        </div>
+
+        <div class="admin-form-row">
+          <div class="admin-form-group">
+            <label class="admin-form-label">Role</label>
+            <input type="text" id="test-form-role" class="admin-form-input" placeholder="e.g. Founder, CEO">
+          </div>
+          <div class="admin-form-group">
+            <label class="admin-form-label">Company / Brand</label>
+            <input type="text" id="test-form-company" class="admin-form-input" placeholder="e.g. Aurelia Boutique">
+          </div>
+        </div>
+
+        <div class="admin-form-row">
+          <div class="admin-form-group">
+            <label class="admin-form-label">Star Rating (1-5)</label>
+            <select id="test-form-rating" class="admin-form-select">
+              <option value="5">5 Stars (★★★★★)</option>
+              <option value="4">4 Stars (★★★★)</option>
+            </select>
+          </div>
+          <div class="admin-form-group">
+            <label class="admin-form-label">Avatar Photo URL</label>
+            <input type="text" id="test-form-avatar" class="admin-form-input" placeholder="https://images.unsplash.com/...">
+          </div>
+        </div>
+
+        <div class="admin-form-group">
+          <label class="admin-form-label">Review Testimonial Text *</label>
+          <textarea id="test-form-text" class="admin-form-textarea" rows="4" required></textarea>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 12px;">
+          <button type="button" class="btn-admin btn-admin-secondary" onclick="closeTestModal()">Cancel</button>
+          <button type="submit" class="btn-admin btn-admin-primary">Add Review</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/admin.js" defer></script>
+</body>
+</html>

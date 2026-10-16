@@ -1,0 +1,26 @@
+{
+  "name": "kiora-tech",
+  "version": "1.0.0",
+  "description": "KioraTech - Premium Digital Agency, E-Commerce Scale & Web Platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "web-development",
+    "amazon-handling",
+    "flipkart-handling",
+    "seo",
+    "social-media",
+    "agency"
+  ],
+  "author": "KioraTech",
+  "license": "ISC",
+  "dependencies": {
+    "compression": "^1.8.2",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "multer": "^1.4.5-lts.1"
+  }
+}
