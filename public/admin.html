@@ -265,6 +265,29 @@
             </div>
           </div>
 
+          <div style="border-top: 1px solid var(--admin-card-border); padding-top: 18px; margin-top: 18px;">
+            <h4 style="font-size: 1.05rem; margin-bottom: 8px; color: var(--admin-accent);">🤖 KioraBot AI Engine Configuration</h4>
+            <p style="color: var(--admin-muted); font-size: 0.8rem; margin-bottom: 16px;">
+              Enter your Google Gemini API Key or OpenAI Key to enable full LLM generative capabilities. If left blank, KioraBot runs on KioraTech's fast built-in natural language engine.
+            </p>
+
+            <div class="admin-form-group">
+              <label class="admin-form-label" style="display: flex; justify-content: space-between;">
+                <span>Google Gemini API Key</span>
+                <span style="font-size: 0.72rem; color: var(--admin-muted);">(AIzaSy...)</span>
+              </label>
+              <input type="password" id="set-gemini-key" class="admin-form-input" placeholder="AIzaSy... (Paste Gemini 1.5 Key here)">
+            </div>
+
+            <div class="admin-form-group">
+              <label class="admin-form-label" style="display: flex; justify-content: space-between;">
+                <span>OpenAI API Key (Alternative)</span>
+                <span style="font-size: 0.72rem; color: var(--admin-muted);">(sk-...)</span>
+              </label>
+              <input type="password" id="set-openai-key" class="admin-form-input" placeholder="sk-... (Paste OpenAI Key here)">
+            </div>
+          </div>
+
           <div class="admin-form-group" style="border-top: 1px solid var(--admin-card-border); padding-top: 18px; margin-top: 18px;">
             <label class="admin-form-label">Change Admin Passcode (Leave blank to keep current)</label>
             <input type="password" id="set-admin-pass" class="admin-form-input" placeholder="Enter new passcode (e.g. secret2026)">

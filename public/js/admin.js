@@ -419,6 +419,8 @@ async function fetchSettings() {
       if (document.getElementById('set-address')) document.getElementById('set-address').value = s.address || 'D-463, LDA Colony, Near Spring Dale College, Kanpur Road, Lucknow - 226012, UP';
       if (document.getElementById('set-projects-done')) document.getElementById('set-projects-done').value = s.projectsCompleted || 180;
       if (document.getElementById('set-happy-clients')) document.getElementById('set-happy-clients').value = s.happyClients || 95;
+      if (document.getElementById('set-gemini-key')) document.getElementById('set-gemini-key').value = s.geminiApiKey || '';
+      if (document.getElementById('set-openai-key')) document.getElementById('set-openai-key').value = s.openaiApiKey || '';
     }
   } catch (err) {
     console.error('Error fetching settings:', err);
@@ -434,7 +436,9 @@ window.saveSettings = async function(e) {
     email: document.getElementById('set-email').value,
     address: document.getElementById('set-address').value,
     projectsCompleted: +document.getElementById('set-projects-done').value || 180,
-    happyClients: +document.getElementById('set-happy-clients').value || 95
+    happyClients: +document.getElementById('set-happy-clients').value || 95,
+    geminiApiKey: document.getElementById('set-gemini-key')?.value?.trim() || '',
+    openaiApiKey: document.getElementById('set-openai-key')?.value?.trim() || ''
   };
 
   const newPass = document.getElementById('set-admin-pass')?.value;

@@ -9,6 +9,8 @@
     "instagram": "https://www.instagram.com/kiora.tech/#",
     "instagramHandle": "@kiora.tech",
     "adminPassword": "admin123",
+    "geminiApiKey": "",
+    "openaiApiKey": "",
     "established": "2024",
     "projectsCompleted": 180,
     "happyClients": 95,
@@ -303,6 +305,18 @@
     }
   ],
   "inquiries": [
+    {
+      "id": "inq-bot-45820",
+      "name": "Chatbot Visitor",
+      "phone": "9876543210",
+      "email": "",
+      "service": "Captured via KioraBot Chat",
+      "budget": "Flexible",
+      "message": "Lead captured from conversation: \"9876543210\"",
+      "status": "New",
+      "source": "KioraBot AI",
+      "createdAt": "2026-10-17T08:57:25.820Z"
+    },
     {
       "id": "inq-691466",
       "name": "Rajesh Verma",

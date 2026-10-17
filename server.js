@@ -69,6 +69,14 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Safe JSON Error Handling (Prevents crash on malformed payload)
+app.use((err, req, res, next) => {
+  if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
+    return res.status(400).json({ success: false, error: 'Invalid JSON payload received' });
+  }
+  next(err);
+});
+
 // Optimized Static Assets with HTTP Caching
 app.use(express.static(path.join(__dirname, 'public'), {
   maxAge: '1h',
@@ -464,6 +472,210 @@ app.delete('/api/testimonials/:id', requireAdmin, (req, res) => {
   db.testimonials = (db.testimonials || []).filter(t => t.id !== req.params.id);
   writeDB(db);
   res.json({ success: true, message: 'Testimonial removed' });
+});
+
+// ==================== 8. SMART AI CHATBOT API ====================
+function generateSmartLocalReply(message, settings) {
+  const text = (message || '').toLowerCase().trim();
+  const phone = settings.phone || '+91 92194 61302';
+  const whatsapp = settings.whatsapp || '919219461302';
+  const email = settings.email || 'kioratech12@gmail.com';
+  const address = settings.address || 'D-463, LDA Colony, Near Spring Dale College, Kanpur Road, Lucknow - 226012, UP';
+
+  // 1. Phone number detected (10 digits)
+  const phoneMatch = text.match(/\b[6-9]\d{9}\b/);
+  if (phoneMatch) {
+    try {
+      const db = readDB();
+      db.inquiries = db.inquiries || [];
+      db.inquiries.unshift({
+        id: 'inq-bot-' + Date.now().toString().slice(-5),
+        name: 'Chatbot Visitor',
+        phone: phoneMatch[0],
+        email: '',
+        service: 'Captured via KioraBot Chat',
+        budget: 'Flexible',
+        message: 'Lead captured from conversation: "' + message + '"',
+        status: 'New',
+        source: 'KioraBot AI',
+        createdAt: new Date().toISOString()
+      });
+      writeDB(db);
+    } catch (e) {}
+
+    return `Dhanyawad! 🙏 Aapka number **${phoneMatch[0]}** hamare technical consultant ko forward ho gaya hai. Hum 30 minute ke andar aapse connect karenge.\n\nYa aap turant WhatsApp par direct message bhej sakte hain: https://wa.me/${whatsapp}`;
+  }
+
+  // 2. Greetings
+  if (text.match(/^(hi|hello|hey|namaste|hlo|helo|pranam|good morning|good evening|kaise ho|kya haal|kya hal)/i)) {
+    return `Namaste! 🙏 Main KioraBot hu — KioraTech ("We Build, You Rule") ka AI assistant.\n\nHum high-speed bespoke websites aur Shopify D2C stores banate hain sirf **4 se 7 din** me!\n\nAapko kis type ki website ya project ke baare me jankari chahiye?`;
+  }
+
+  // 3. Pricing / Cost / Kitna / Rates / Package
+  if (text.match(/(price|pricing|cost|charge|kitna|rate|budget|package|fees|kitne me|kitne ka)/i)) {
+    return `KioraTech ke transparent packages:\n\n💻 **Starter Website:** ₹14,999 (4-7 Din me launch, 5 pages, SSL, WhatsApp Integration, Speed 95+)\n🚀 **Business Growth Platform:** ₹29,999 (Glassmorphic 3D, advanced On-Page SEO, Analytics)\n🛍️ **Shopify D2C Store Setup:** ₹29,999 - ₹34,999 (Liquid Theme, Razorpay/COD, Cart Recovery Funnel)\n📱 **Social Media & Reels Branding:** ₹12,999/month (@kiora.tech)\n\nAap apne business ka name aur requirement batayein, hum best offer quote denge!`;
+  }
+
+  // 4. Delivery Time / Timeline / Kitne din
+  if (text.match(/(din|days|time|turnaround|kab tak|duration|timeline|kitna time|delivery)/i)) {
+    return `⚡ Hamari delivery timeline **4 se 7 din** (4–7 Days) hai!\n\nHum clean architecture aur sub-1.5s ultra fast speed ke sath complete ready website launch karke dete hain. Urgent requirements ke liye WhatsApp par connect karein: https://wa.me/${whatsapp}`;
+  }
+
+  // 5. Live Projects / Portfolio / Work / Client / Sample
+  if (text.match(/(portfolio|work|client|sample|live|example|project|kaam|dekho|dikhao|organicsanjeevani|kiyan)/i)) {
+    return `Hamare real live verified projects check karein:\n\n🌿 **Organic Sanjeevani Roots**\n👉 https://organicsanjeevaniroots.com/\n(100% Ayurvedic D2C Store with 1-click WhatsApp checkout & rich schema SEO)\n\n📦 **Kiyan Export & Manufacturing**\n👉 https://kiyanexports.com/\n(Global B2B Herbal Wholesale Exporter, Est. 2014, with Google Ads tracking)\n\n🛍️ **Shopify D2C Lifestyle Store**\n(+340% checkout conversions with Razorpay & COD)\n\nAap bhi apne business ke liye aisi live website chahte hain?`;
+  }
+
+  // 6. Shopify / Ecommerce / D2C / Online Dukan
+  if (text.match(/(shopify|ecommerce|e-commerce|store|dukan|cart|sell online|products|d2c)/i)) {
+    return `🛍️ Hum high-converting **Shopify & Custom D2C Stores** develop karte hain!\n\n✓ Custom Liquid Theme Setup & Branding\n✓ Razorpay, PhonePe, UPI & Cash on Delivery (COD)\n✓ WhatsApp 1-Click Direct Order Alerts\n✓ Abandoned Cart Recovery Funnel\n\nLive example: https://organicsanjeevaniroots.com/\nQuotation ke liye apna number share karein!`;
+  }
+
+  // 7. SEO / Google Ranking
+  if (text.match(/(seo|google|rank|traffic|keyword|search console|gmb)/i)) {
+    return `🎯 Hamara **Website Speed & Local Google Presence** package (Starting ₹9,999):\n\n✓ 90+ Google PageSpeed Core Web Vitals Optimization\n✓ Google Business Profile (GMB) Local Map Pack Ranking\n✓ Local Search Intent Schema Markup\n✓ Click-to-call & WhatsApp lead sync\n\nIsse local buyers Google par search karke directly aapko call karte hain!`;
+  }
+
+  // 8. Social Media / Instagram / Reels
+  if (text.match(/(instagram|insta|reel|social media|branding|video|followers|post)/i)) {
+    return `📸 Hamara official Instagram channel hai **@kiora.tech**!\nLink: https://www.instagram.com/kiora.tech/#\n\nHum provide karte hain:\n✓ Aesthetic Feed Grids & Carousel Designs\n✓ Viral Video Reel Scripting, Hooks & Voiceovers\n✓ Inbound WhatsApp & DM Lead funnels\nStarting at ₹12,999/month!`;
+  }
+
+  // 9. Location / Address / Office / Lucknow
+  if (text.match(/(address|location|office|kahan|kanpur road|lucknow|city|meet)/i)) {
+    return `📍 **KioraTech Official Address:**\n${address}\n\n📞 Phone: ${phone}\n💬 WhatsApp: https://wa.me/${whatsapp}\n✉️ Email: ${email}\n\nAap office visit ke liye time schedule kar sakte hain ya online call arrange kar sakte hain!`;
+  }
+
+  // 10. Contact / Call / Number / WhatsApp
+  if (text.match(/(contact|phone|call|whatsapp|number|talk|connect|mail|email)/i)) {
+    return `KioraTech Team se sampark karein:\n\n📱 Call/WhatsApp: ${phone}\n💬 Instant Chat: https://wa.me/${whatsapp}\n✉️ Email: ${email}\n📸 Instagram: @kiora.tech (https://www.instagram.com/kiora.tech/#)\n\nAap apna phone number bhi yahan chhod sakte hain, hum call kar lenge!`;
+  }
+
+  // 11. Technology / Stack
+  if (text.match(/(tech|technology|stack|node|react|code|wordpress|hosting)/i)) {
+    return `💻 Hum enterprise modern tech stack use karte hain:\n\n✓ Node.js, Express, Next.js, React\n✓ Shopify Liquid & Custom Headless Storefronts\n✓ Cloudflare CDN, AWS, Vercel Serverless\n✓ Sub-1.5 second loading speed with 95+ Core Web Vitals score!`;
+  }
+
+  // Default Fallback
+  return `KioraTech ("We Build, You Rule") me aapka swagat hai! 🙏\n\nHum high-speed business websites aur Shopify stores banate hain sirf **4 se 7 din** me (Starting ₹14,999).\n\nAapki requirement ke liye humse direct connect karein:\n📱 Call/WhatsApp: ${phone}\n💬 WhatsApp: https://wa.me/${whatsapp}\n\nYa apna 10-digit phone number yahan type karein, hamari team aapse turant connect karegi!`;
+}
+
+app.post('/api/chat', async (req, res) => {
+  const { message, history } = req.body || {};
+  if (!message || typeof message !== 'string') {
+    return res.status(400).json({ success: false, error: 'Message is required' });
+  }
+
+  const db = readDB();
+  const settings = db.settings || {};
+  const geminiKey = process.env.GEMINI_API_KEY || settings.geminiApiKey || '';
+  const openaiKey = process.env.OPENAI_API_KEY || settings.openaiApiKey || '';
+
+  // 1. If Gemini API Key is configured, use Gemini 1.5 Flash
+  if (geminiKey) {
+    try {
+      const systemInstruction = `You are KioraBot, the official smart AI assistant of KioraTech ("We Build, You Rule").
+KioraTech is a full-service web development and digital agency based in Lucknow, India.
+Website: http://localhost:5000 / https://kioratech.vercel.app
+Instagram: @kiora.tech (https://www.instagram.com/kiora.tech/#)
+Phone/WhatsApp: +91 92194 61302
+Email: kioratech12@gmail.com
+Address: D-463, LDA Colony, Near Spring Dale College, Kanpur Road, Lucknow - 226012, UP
+Turnaround: All starter websites and Shopify stores are delivered in 4 to 7 days (4–7 din).
+Key Services:
+- Custom Web & App Development: starting ₹14,999
+- Shopify D2C Store Setup: starting ₹29,999
+- Social Media & Reels Branding: starting ₹12,999/mo
+- Website Speed & Local Google SEO: starting ₹9,999
+Verified Live Client Websites built by KioraTech:
+1. Organic Sanjeevani Roots (organicsanjeevaniroots.com) - Herbal & Ayurvedic Superfoods D2C store with 1-click WhatsApp checkout.
+2. Kiyan Export (kiyanexports.com) - Global B2B Herbal & Botanical wholesale exporter (Est. 2014) with quote engine.
+Personality: Warm, energetic, polite, professional. Respond in natural Hindi, Hinglish, or English depending on user greeting. Provide helpful, crisp answers with emojis and bullet points. Always invite them to connect on WhatsApp (+91 92194 61302) or share their 10-digit number.`;
+
+      const contents = [];
+      if (Array.isArray(history)) {
+        history.slice(-6).forEach(h => {
+          contents.push({
+            role: h.role === 'user' ? 'user' : 'model',
+            parts: [{ text: h.content || '' }]
+          });
+        });
+      }
+      contents.push({
+        role: 'user',
+        parts: [{ text: message }]
+      });
+
+      const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiKey}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          systemInstruction: { parts: [{ text: systemInstruction }] },
+          contents,
+          generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 350
+          }
+        })
+      });
+
+      if (geminiRes.ok) {
+        const geminiData = await geminiRes.json();
+        const text = geminiData?.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (text) {
+          return res.json({ success: true, reply: text, provider: 'gemini' });
+        }
+      }
+    } catch (apiErr) {
+      console.warn('Gemini API call failed, falling back to local NLP engine:', apiErr.message);
+    }
+  }
+
+  // 2. If OpenAI Key is configured
+  if (openaiKey) {
+    try {
+      const messages = [
+        {
+          role: 'system',
+          content: `You are KioraBot, the official smart assistant of KioraTech ("We Build, You Rule") in Lucknow, India. Deliver websites in 4-7 days. Web starting ₹14,999, Shopify D2C starting ₹29,999. Live clients: organicsanjeevaniroots.com, kiyanexports.com. WhatsApp/Phone: +91 92194 61302. Address: D-463, LDA Colony, Near Spring Dale College, Kanpur Road, Lucknow. Instagram: @kiora.tech. Keep answers crisp and friendly in natural Hindi/Hinglish.`
+        }
+      ];
+      if (Array.isArray(history)) {
+        history.slice(-4).forEach(h => {
+          messages.push({ role: h.role === 'user' ? 'user' : 'assistant', content: h.content });
+        });
+      }
+      messages.push({ role: 'user', content: message });
+
+      const openaiRes = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${openaiKey}`
+        },
+        body: JSON.stringify({
+          model: 'gpt-4o-mini',
+          messages,
+          max_tokens: 350,
+          temperature: 0.7
+        })
+      });
+
+      if (openaiRes.ok) {
+        const openData = await openaiRes.json();
+        const text = openData?.choices?.[0]?.message?.content;
+        if (text) {
+          return res.json({ success: true, reply: text, provider: 'openai' });
+        }
+      }
+    } catch (apiErr) {
+      console.warn('OpenAI API call failed, falling back to local NLP engine:', apiErr.message);
+    }
+  }
+
+  // 3. Instant Smart Local NLP Fallback Engine
+  const reply = generateSmartLocalReply(message, settings);
+  res.json({ success: true, reply, provider: 'local-nlp' });
 });
 
 // Admin Panel route shortcut

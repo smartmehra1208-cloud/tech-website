@@ -480,7 +480,7 @@ function initScrollEffects() {
       if (typeof closeSuccessModal === 'function') closeSuccessModal();
       if (navLinks) navLinks.classList.remove('active');
       const chatBox = document.getElementById('chatbot-box');
-      if (chatBox) chatBox.classList.remove('open');
+      if (chatBox) chatBox.classList.remove('active');
     }
   });
 
@@ -1036,73 +1036,144 @@ function initChatbot() {
 
   if (!triggerBtn || !chatBox) return;
 
-  triggerBtn.addEventListener('click', () => {
+  const chatHistory = [];
+
+  // Toggle chatbot
+  triggerBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
     chatBox.classList.toggle('active');
+    const unreadDot = triggerBtn.querySelector('.chatbot-unread-dot');
+    if (unreadDot) unreadDot.style.display = 'none';
+    if (chatBox.classList.contains('active') && input) {
+      setTimeout(() => input.focus(), 200);
+    }
   });
 
   if (closeBtn) {
-    closeBtn.addEventListener('click', () => {
+    closeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       chatBox.classList.remove('active');
     });
   }
 
-  const knowledge = {
-    web: "Hum custom websites, landing pages, modern animations aur full D2C e-commerce stores banate hain. Prices start from ₹14,999 with complete SEO and mobile responsiveness.",
-    pricing: "Starter Website: ₹14,999, Business Website: ₹29,999, Amazon/Flipkart Account Handling: ₹17,999/month, SEO Growth: ₹16,999/month, Social Media: ₹15,999/month.",
-    amazon: "Amazon & Flipkart par registration, KYC, catalog listing, A+ content, Sponsored Ads (PPC) aur daily dispatch handling hum manage karte hain taaki aapki sales 3x-5x grow ho.",
-    seo: "SEO me keyword research, technical error fixes, schema markup aur high-DA backlinks provide karte hain. 60-90 din me aap Google Page 1 par rank kar sakte hain.",
-    contact: "Aap niche Let's Talk form bhar sakte hain ya WhatsApp button par click karke direct hamare senior tech consultant se connect kar sakte hain."
-  };
+  // Format message text with bold and clickable links
+  function formatChatText(str) {
+    if (!str) return '';
+    let formatted = escapeHtml(str);
+    // Bold **text**
+    formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    // URLs to links
+    formatted = formatted.replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener" style="color:var(--cyan-bright);text-decoration:underline;">$1</a>');
+    // wa.me shorthand
+    formatted = formatted.replace(/(wa\.me\/[^\s<]+)/g, '<a href="https://$1" target="_blank" rel="noopener" style="color:var(--cyan-bright);text-decoration:underline;">$1</a>');
+    // Newlines
+    formatted = formatted.replace(/\n/g, '<br>');
+    return formatted;
+  }
 
   function appendMsg(text, sender = 'bot') {
     const div = document.createElement('div');
     div.className = `chat-msg ${sender}`;
-    div.textContent = text;
+    div.innerHTML = formatChatText(text);
     messagesDiv.appendChild(div);
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
   }
 
-  window.sendQuickPrompt = function(topic) {
-    appendMsg(topic, 'user');
-    setTimeout(() => {
-      const key = topic.toLowerCase();
-      let reply = knowledge.web;
-      if (key.includes('price') || key.includes('cost') || key.includes('rate')) reply = knowledge.pricing;
-      else if (key.includes('amazon') || key.includes('flipkart') || key.includes('market')) reply = knowledge.amazon;
-      else if (key.includes('seo') || key.includes('rank') || key.includes('google')) reply = knowledge.seo;
-      else if (key.includes('contact') || key.includes('phone') || key.includes('call')) reply = knowledge.contact;
-      appendMsg(reply, 'bot');
-    }, 400);
-  };
+  function showTypingIndicator() {
+    removeTypingIndicator();
+    const typingDiv = document.createElement('div');
+    typingDiv.id = 'bot-typing-indicator';
+    typingDiv.className = 'chat-msg bot typing-indicator-bubble';
+    typingDiv.innerHTML = '<span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>';
+    messagesDiv.appendChild(typingDiv);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+  }
 
-  function handleSend() {
+  function removeTypingIndicator() {
+    const el = document.getElementById('bot-typing-indicator');
+    if (el) el.remove();
+  }
+
+  // Client-side smart fallback if backend API is unreachable
+  function getClientFallbackReply(text) {
+    const lower = text.toLowerCase();
+    const phone = APP_STATE.settings?.phone || '+91 92194 61302';
+    const whatsapp = APP_STATE.settings?.whatsapp || '919219461302';
+
+    if (/\b[6-9]\d{9}\b/.test(lower)) {
+      return `Dhanyawad! 🙏 Aapka number capture ho gaya hai. Hamare senior consultant 30 minute ke andar aapse connect karenge.\n\nYa turant WhatsApp par baat karein: https://wa.me/${whatsapp}`;
+    }
+    if (lower.match(/(price|pricing|cost|kitna|rate|budget|package)/i)) {
+      return `KioraTech ke transparent packages:\n\n💻 **Starter Website:** ₹14,999 (4-7 Din me launch, Speed 95+, SSL)\n🚀 **Business Growth:** ₹29,999 (3D Glassmorphism, Advanced SEO)\n🛍️ **Shopify D2C Store:** ₹29,999 - ₹34,999 (Razorpay/COD, Cart Funnel)\n📱 **Instagram Branding:** ₹12,999/mo (@kiora.tech)\n\nAapko kis type ke project ka quotation chahiye?`;
+    }
+    if (lower.match(/(din|days|time|turnaround|kab tak|delivery)/i)) {
+      return `⚡ Hamari delivery timeline **4 se 7 din** (4–7 Days) hai! Urgent requirements ke liye WhatsApp par connect karein: https://wa.me/${whatsapp}`;
+    }
+    if (lower.match(/(portfolio|work|client|sample|live|organicsanjeevani|kiyan)/i)) {
+      return `Hamare real live verified projects check karein:\n\n🌿 **Organic Sanjeevani Roots**\n👉 https://organicsanjeevaniroots.com/\n(100% Ayurvedic D2C Store with 1-click WhatsApp checkout)\n\n📦 **Kiyan Export & Manufacturing**\n👉 https://kiyanexports.com/\n(Global B2B Wholesale Exporter, Est. 2014)\n\n🛍️ **Shopify D2C Store**\n(+340% checkout conversions)`;
+    }
+    if (lower.match(/(address|location|office|lucknow|kanpur road)/i)) {
+      return `📍 **KioraTech Official Address:**\nD-463, LDA Colony, Near Spring Dale College, Kanpur Road, Lucknow - 226012, UP.\n\n📞 Phone: ${phone}\n💬 WhatsApp: https://wa.me/${whatsapp}`;
+    }
+    if (lower.match(/(contact|phone|call|whatsapp|number)/i)) {
+      return `📱 Call/WhatsApp: ${phone}\n💬 Instant Chat: https://wa.me/${whatsapp}\n✉️ Email: kioratech12@gmail.com\n📸 Instagram: @kiora.tech (https://www.instagram.com/kiora.tech/#)`;
+    }
+    return `Namaste! 🙏 KioraTech ("We Build, You Rule") me aapka swagat hai.\n\nHum high-performance websites aur Shopify D2C stores banate hain sirf **4 se 7 din** me (Starting ₹14,999).\n\nAap apna phone number yahan type karein ya direct WhatsApp par connect karein: https://wa.me/${whatsapp}`;
+  }
+
+  async function handleSend() {
     const txt = input.value.trim();
     if (!txt) return;
+
     appendMsg(txt, 'user');
     input.value = '';
+    showTypingIndicator();
 
-    setTimeout(() => {
-      const lower = txt.toLowerCase();
-      let response = "Thank you! Hamari team aapke project requirements ko samajhne ke liye taiyar hai. Aap instant WhatsApp par baat karne ke liye niche WhatsApp button use karein ya apna number share karein!";
-      if (lower.includes('price') || lower.includes('cost') || lower.includes('kitna') || lower.includes('charge')) {
-        response = knowledge.pricing;
-      } else if (lower.includes('amazon') || lower.includes('flipkart') || lower.includes('seller') || lower.includes('listing')) {
-        response = knowledge.amazon;
-      } else if (lower.includes('seo') || lower.includes('google') || lower.includes('traffic')) {
-        response = knowledge.seo;
-      } else if (lower.includes('website') || lower.includes('web') || lower.includes('app') || lower.includes('design')) {
-        response = knowledge.web;
-      } else if (/\d{10}/.test(lower)) {
-        response = "Dhanyawad! Aapka phone number capture ho gaya hai. Hamare senior manager 30 minute ke andar aapse connect karenge.";
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: txt, history: chatHistory })
+      });
+
+      removeTypingIndicator();
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data.reply) {
+          appendMsg(data.reply, 'bot');
+          chatHistory.push({ role: 'user', content: txt });
+          chatHistory.push({ role: 'assistant', content: data.reply });
+          return;
+        }
       }
-      appendMsg(response, 'bot');
-    }, 500);
+      // If server returned non-ok, fall back to client logic
+      const fallback = getClientFallbackReply(txt);
+      appendMsg(fallback, 'bot');
+    } catch (err) {
+      removeTypingIndicator();
+      const fallback = getClientFallbackReply(txt);
+      appendMsg(fallback, 'bot');
+    }
   }
+
+  window.sendQuickPrompt = function(topic) {
+    if (!chatBox.classList.contains('active')) {
+      chatBox.classList.add('active');
+    }
+    if (input) {
+      input.value = topic;
+      handleSend();
+    }
+  };
 
   if (sendBtn) sendBtn.addEventListener('click', handleSend);
   if (input) {
     input.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') handleSend();
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleSend();
+      }
     });
   }
 }
