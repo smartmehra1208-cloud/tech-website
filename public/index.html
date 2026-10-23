@@ -38,8 +38,8 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="images/logo.png">
 
-  <!-- Core Stylesheet -->
-  <link rel="stylesheet" href="css/style.css">
+  <!-- Core Stylesheet with Version Cache-Buster -->
+  <link rel="stylesheet" href="css/style.css?v=3.1">
 
   <!-- Schema.org Rich Structured Data (JSON-LD) -->
   <script type="application/ld+json">
@@ -105,46 +105,37 @@
   <header class="navbar">
     <div class="container nav-container">
       <a href="#" class="brand-logo">
-        <img src="images/logo.png" alt="KioraTech Logo">
+        <img src="images/logo.png" alt="KioraTech Logo" style="height: 32px; width: 32px; object-fit: contain; border-radius: 6px; background: #ffffff; padding: 2px; flex-shrink: 0;">
         <div class="brand-text">Kiora<span>Tech</span></div>
       </a>
 
       <ul class="nav-links" id="nav-links">
-        <li><a href="#transformation">Speed Test</a></li>
         <li><a href="#services">Services</a></li>
+        <li><a href="#global-map">World Map 🌍</a></li>
         <li><a href="#web-packages">Packages</a></li>
         <li><a href="#portfolio">Work</a></li>
-        <li><a href="#reels-showcase">Reels 🎥</a></li>
-        <li><a href="#catalog">Catalog</a></li>
         <li><a href="#calculator">Estimator</a></li>
-        <li><a href="#process">Process</a></li>
         <li><a href="#testimonials">Reviews</a></li>
-        <li><a href="#faq">FAQ</a></li>
       </ul>
 
       <div class="nav-actions">
         <!-- Instagram Link -->
-        <a href="https://www.instagram.com/kiora.tech/#" target="_blank" rel="noopener" class="instagram-pill-btn dynamic-instagram-link" title="Follow KioraTech on Instagram">
+        <a href="https://www.instagram.com/kiora.tech/#" target="_blank" rel="noopener" class="instagram-pill-btn dynamic-instagram-link" title="Follow KioraTech on Instagram" style="padding: 6px 12px; font-size: 0.8rem;">
           <span>📸 @kiora.tech</span>
         </a>
 
         <!-- Hindi / English Switch -->
-        <button class="btn-icon-toggle" id="lang-toggle-btn" title="Toggle Language">
+        <button class="btn-icon-toggle" id="lang-toggle-btn" title="Toggle Language" style="padding: 5px 10px; font-size: 0.8rem;">
           <span>🌐 हिंदी</span>
         </button>
 
         <!-- Dark / Light Theme Switch -->
-        <button class="btn-icon-toggle" id="theme-toggle-btn" title="Toggle Theme">
-          <span id="theme-icon">☀️ Light</span>
+        <button class="btn-icon-toggle" id="theme-toggle-btn" title="Toggle Theme" style="padding: 5px 8px; font-size: 0.85rem;" aria-label="Toggle Theme">
+          <span id="theme-icon">☀️</span>
         </button>
 
-        <!-- Admin CMS Link -->
-        <a href="/admin" class="nav-admin-link" title="Open Server CMS Admin Panel">
-          <span>⚙️ Admin</span>
-        </a>
-
         <!-- Primary CTA -->
-        <a href="#contact" class="btn btn-primary pulse-btn nav-cta-btn">Get a Quote</a>
+        <a href="#contact" class="btn btn-primary pulse-btn nav-cta-btn" style="padding: 8px 18px; font-size: 0.86rem; font-weight: 700;">Get a Quote</a>
 
         <!-- Mobile Menu Hamburger -->
         <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open Mobile Menu">☰</button>
@@ -288,289 +279,224 @@
     </div>
   </section>
 
-  <!-- Interactive Before vs After Transformation Slider -->
-  <section class="section" id="transformation">
+  <!-- Global Infrastructure & Interactive 3D World Globe -->
+  <section class="section" id="global-map">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag" style="background: rgba(0, 240, 255, 0.15); border-color: var(--cyan-bright); color: var(--cyan-bright);">⚡ Proof of Engineering</span>
-        <h2 class="section-title">The KioraTech Transformation</h2>
+        <span class="section-tag" style="background: rgba(0, 240, 255, 0.15); border-color: var(--cyan-bright); color: var(--cyan-bright);">🌍 Global Digital Reach</span>
+        <h2 class="section-title">Worldwide Client & Server Network</h2>
         <p class="section-subtitle">
-          See the dramatic difference between a slow, outdated legacy website and a lightning-fast, high-converting KioraTech growth engine. Drag or tap the slider below to compare!
+          Engineered in Lucknow, deployed to the world. Our high-performance websites and Shopify stores serve buyers across India, UAE, USA, and Europe with sub-second speeds. Drag the 3D globe to explore!
         </p>
       </div>
 
-      <div class="ba-slider-wrapper">
-        <div class="ba-slider-container" id="ba-slider-container">
-          <!-- BEFORE: Outdated Legacy Website -->
-          <div class="ba-panel ba-panel-before">
-            <div class="ba-badge ba-badge-before">❌ Standard / Slow Legacy Site</div>
-            <div class="ba-mockup-inner">
-              <div class="ba-browser-bar before-bar">
-                <div class="ba-traffic-dots"><span class="ba-dot red"></span><span class="ba-dot yellow"></span><span class="ba-dot green"></span></div>
-                <div class="ba-url-bar">⚠️ slow-legacy-store.in (Not Secure • Uncompressed)</div>
-              </div>
-              <div class="ba-content-preview before-content">
-                <div class="ba-metrics-row">
-                  <div class="ba-metric-pill metric-bad">⏳ 4.8s Mobile Load</div>
-                  <div class="ba-metric-pill metric-bad">📉 PageSpeed 32/100</div>
-                  <div class="ba-metric-pill metric-bad">🚫 68% Bounce Rate</div>
-                </div>
-                <div class="ba-visual-card bad-visual">
-                  <div class="bad-banner">⚠️ Warning: High Cart Abandonment & Lost Customers</div>
-                  <div class="bad-wireframe-grid">
-                    <div class="bad-block"><span>Broken Layout</span></div>
-                    <div class="bad-block"><span>No UPI / WhatsApp</span></div>
-                    <div class="bad-block"><span>Laggy Scrolling</span></div>
-                  </div>
-                  <div class="bad-checkout-box">
-                    <span>❌ 5-Step Complex Checkout Form (82% Drop-Off)</span>
-                  </div>
-                </div>
-              </div>
+      <div class="globe-showcase-layout">
+        <!-- 3D Interactive Globe Container -->
+        <div class="globe-viewport-card">
+          <div class="globe-canvas-wrap">
+            <canvas id="world-globe-canvas" width="540" height="540"></canvas>
+            <div class="globe-drag-hint">
+              <span>✦ Click & drag to rotate 3D World Globe ✦</span>
             </div>
-          </div>
-
-          <!-- AFTER: KioraTech Engine (Width controlled by slider) -->
-          <div class="ba-panel ba-panel-after" id="ba-panel-after">
-            <div class="ba-badge ba-badge-after">⚡ KioraTech Growth Engine</div>
-            <div class="ba-mockup-inner">
-              <div class="ba-browser-bar after-bar">
-                <div class="ba-traffic-dots"><span class="ba-dot red"></span><span class="ba-dot yellow"></span><span class="ba-dot green"></span></div>
-                <div class="ba-url-bar">🔒 organicsanjeevaniroots.com (Sub-1s SSL • Cloudflare Edge)</div>
-              </div>
-              <div class="ba-content-preview after-content">
-                <div class="ba-metrics-row">
-                  <div class="ba-metric-pill metric-good">⚡ 0.8s Mobile Speed</div>
-                  <div class="ba-metric-pill metric-good">🚀 PageSpeed 99/100</div>
-                  <div class="ba-metric-pill metric-good">📈 +340% Sales Velocity</div>
-                </div>
-                <div class="ba-visual-card good-visual">
-                  <div class="good-banner">✨ "We Build, You Rule." — Verified 4–7 Days Delivery Guarantee</div>
-                  <div class="good-wireframe-grid">
-                    <div class="good-block"><span>🚀 Cloudflare CDN</span></div>
-                    <div class="good-block"><span>💬 1-Click WhatsApp</span></div>
-                    <div class="good-block"><span>🟢 Top Google SEO</span></div>
-                  </div>
-                  <div class="good-checkout-box">
-                    <span>✅ Instant 1-Click WhatsApp & Razorpay UPI Checkout (99.4% Success)</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Drag Handle -->
-          <div class="ba-handle" id="ba-handle">
-            <div class="ba-handle-line"></div>
-            <div class="ba-handle-button">
-              <span>◀ ▶</span>
+            <div class="globe-status-pill">
+              <span class="status-pulse-dot"></span>
+              <span>LIVE EDGE NETWORK: <strong>99.98% UPTIME</strong></span>
             </div>
           </div>
         </div>
 
-        <div class="ba-slider-hint">
-          <span>👈 <strong>Drag or tap</strong> horizontally to compare Before vs. After 👉</span>
+        <!-- Network Metrics & Verified Routes -->
+        <div class="globe-details-panel">
+          <div class="globe-metric-card">
+            <div class="g-metric-icon">🚀</div>
+            <div class="g-metric-info">
+              <span class="g-metric-val">&lt; 22ms</span>
+              <span class="g-metric-lbl">Average Global Edge Latency</span>
+            </div>
+          </div>
+
+          <div class="globe-metric-card">
+            <div class="g-metric-icon">🛡️</div>
+            <div class="g-metric-info">
+              <span class="g-metric-val">100% Secure</span>
+              <span class="g-metric-lbl">Cloudflare Edge SSL & DDoS Shield</span>
+            </div>
+          </div>
+
+          <div class="globe-hubs-box">
+            <h4>Live Verified Client Hubs</h4>
+            <div class="globe-hubs-list">
+              <div class="hub-item active-hq">
+                <span class="hub-flag">🇮🇳</span>
+                <div class="hub-info">
+                  <strong>Lucknow, India (Central HQ)</strong>
+                  <span>Organic Sanjeevani Roots & Core Engineering</span>
+                </div>
+                <span class="hub-badge">HQ Hub</span>
+              </div>
+
+              <div class="hub-item">
+                <span class="hub-flag">🇦🇪</span>
+                <div class="hub-info">
+                  <strong>Dubai, UAE (Middle East)</strong>
+                  <span>Kiyan Export Global Wholesale Network</span>
+                </div>
+                <span class="hub-badge">B2B Route</span>
+              </div>
+
+              <div class="hub-item">
+                <span class="hub-flag">🇺🇸</span>
+                <div class="hub-info">
+                  <strong>New York / San Francisco, USA</strong>
+                  <span>Wholesale Import Portals & Cloud Edge</span>
+                </div>
+                <span class="hub-badge">Edge CDN</span>
+              </div>
+
+              <div class="hub-item">
+                <span class="hub-flag">🇬🇧</span>
+                <div class="hub-info">
+                  <strong>London, UK (Europe Gateway)</strong>
+                  <span>Global Shopify D2C Consumer Traffic</span>
+                </div>
+                <span class="hub-badge">Fast Route</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="globe-cta-box">
+            <a href="#contact" class="btn btn-primary btn-sm" style="width: 100%; justify-content: center;">
+              <span>Deploy Your Global Platform in 4–7 Days</span> <i>↗</i>
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Services Hub with Modern Apple/Linear Bento Grid -->
+  <!-- Services Hub -->
   <section class="section alt-bg" id="services">
     <div class="container">
       <div class="section-header">
         <span class="section-tag">What We Deliver</span>
-        <h2 class="section-title" id="services-sec-title">Engineered For Explosive Growth</h2>
+        <h2 class="section-title" id="services-sec-title">Our Core Web & Digital Capabilities</h2>
         <p class="section-subtitle">
-          From high-performance custom websites and bespoke Shopify D2C stores to viral social brand presence — engineered and delivered in <strong>4 to 7 days</strong>.
+          From bespoke high-converting websites and full-fledged Shopify D2C stores to social brand presence — engineered and delivered in <strong>4 to 7 days</strong>.
         </p>
       </div>
 
-      <div class="bento-grid">
-        <!-- Bento 1: Custom Web & App Development (Hero Bento 2-Col) -->
-        <div class="bento-card bento-span-2 bento-hero">
-          <div class="bento-glow"></div>
-          <div class="bento-top-badges">
-            <span class="bento-pill bento-pill-cyan">💻 Flagship Core</span>
-            <span class="bento-pill bento-pill-emerald">⚡ 4 to 7 Days Delivery</span>
+      <div class="services-grid">
+        <!-- Service 1: Web Development -->
+        <div class="service-card highlight-card">
+          <div>
+            <div class="service-icon-box">💻</div>
+            <h3>Custom Web & App Development</h3>
+            <p>From conversion-focused business websites to corporate portals and full-stack web applications engineered for speed, mobile responsiveness, and client conversion.</p>
+            <ul class="service-deliverables">
+              <li>100% Mobile Responsive & Sub-1.5s Ultra-Fast Load</li>
+              <li>Lightning-Fast Delivery in <strong>4 to 7 Days</strong></li>
+              <li>Lead Capture Forms & Direct WhatsApp Instant Sync</li>
+              <li>Built-in On-Page SEO Architecture & Schema Markup</li>
+            </ul>
           </div>
-          <div class="bento-body">
-            <div class="bento-icon-lg">💻</div>
-            <h3 class="bento-title">High-Performance Websites & Full-Stack Apps</h3>
-            <p class="bento-desc">
-              Custom corporate portals, responsive web platforms, and dynamic web apps engineered with sub-second speeds, zero bloatware, and Google PageSpeed 99+ guarantee.
-            </p>
-            
-            <!-- Live Speed Gauge Showcase inside Bento Card -->
-            <div class="bento-speed-widget">
-              <div class="bento-gauge">
-                <svg viewBox="0 0 100 100" class="gauge-svg">
-                  <circle cx="50" cy="50" r="42" class="gauge-bg"></circle>
-                  <circle cx="50" cy="50" r="42" class="gauge-fill"></circle>
-                </svg>
-                <div class="gauge-text">
-                  <span class="gauge-val">99</span>
-                  <span class="gauge-lbl">PageSpeed</span>
-                </div>
-              </div>
-              <div class="bento-metrics-col">
-                <div class="bento-metric-row"><span>⏱️ First Contentful Paint:</span> <strong>0.6s</strong></div>
-                <div class="bento-metric-row"><span>📱 Mobile Responsiveness:</span> <strong>100%</strong></div>
-                <div class="bento-metric-row"><span>🔒 Security & CDN:</span> <strong>Cloudflare SSL</strong></div>
-              </div>
-            </div>
-
-            <div class="bento-tech-tags">
-              <span>Next.js</span><span>React</span><span>Node.js</span><span>PWA</span><span>Tailwind</span><span>Cloudflare CDN</span>
-            </div>
-          </div>
-          <div class="bento-footer">
-            <div class="bento-price-box">
-              <span class="bento-price-label">Investment</span>
-              <span class="bento-price-val">Starting ₹14,999</span>
-            </div>
-            <a href="#contact" onclick="selectServiceForContact('Custom Web & App Development')" class="btn btn-primary btn-sm">
-              <span>Start Project</span> <i>↗</i>
-            </a>
+          <div class="service-card-footer">
+            <span class="service-pricing-badge">Starting ₹14,999</span>
+            <a href="#contact" onclick="selectServiceForContact('Custom Web & App Development')" class="btn btn-sm btn-secondary">Inquire ↗</a>
           </div>
         </div>
 
-        <!-- Bento 2: Shopify D2C Stores (Hero Bento 2-Col) -->
-        <div class="bento-card bento-span-2 bento-shopify">
-          <div class="bento-glow"></div>
-          <div class="bento-top-badges">
-            <span class="bento-pill bento-pill-purple">🛍️ D2C Store Engine</span>
-            <span class="bento-pill bento-pill-emerald">Instant WhatsApp Checkout</span>
+        <!-- Service 2: Shopify & D2C Stores -->
+        <div class="service-card highlight-card">
+          <div>
+            <div class="service-icon-box">🛍️</div>
+            <h3>Shopify & D2C E-Commerce Stores</h3>
+            <p>Launch your brand online with complete control. High-converting D2C storefronts, seamless UPI/COD checkout, product catalogs, and automated WhatsApp tracking.</p>
+            <ul class="service-deliverables">
+              <li>Custom Premium Shopify Theme Setup & Branding</li>
+              <li>Razorpay, PhonePe, Cashfree & Cash on Delivery (COD)</li>
+              <li>Automated WhatsApp Order & Tracking Notifications</li>
+              <li>Proven by Live Clients like <em>Organic Sanjeevani Roots</em></li>
+            </ul>
           </div>
-          <div class="bento-body">
-            <div class="bento-icon-lg">🛒</div>
-            <h3 class="bento-title">Shopify & Custom D2C E-Commerce Stores</h3>
-            <p class="bento-desc">
-              Launch an online storefront that turns visitors into repeat paying clients. Seamless Razorpay UPI, COD order verification, and automated WhatsApp order tracking.
-            </p>
-
-            <!-- Store Mockup Mini Preview -->
-            <div class="bento-store-preview">
-              <div class="store-mini-item">
-                <span class="store-live-dot"></span>
-                <span>Live Client: <strong>Organic Sanjeevani Roots</strong></span>
-                <span class="store-badge-teal">Sub-1s Mobile</span>
-              </div>
-              <div class="store-features-row">
-                <div class="sf-pill">💳 Razorpay / PhonePe / COD</div>
-                <div class="sf-pill">💬 1-Click WhatsApp Order</div>
-                <div class="sf-pill">📦 Automated WhatsApp Alerts</div>
-              </div>
-            </div>
-
-            <div class="bento-tech-tags">
-              <span>Shopify Liquid</span><span>Razorpay UPI</span><span>COD Protection</span><span>Abandoned Cart Recovery</span>
-            </div>
-          </div>
-          <div class="bento-footer">
-            <div class="bento-price-box">
-              <span class="bento-price-label">Investment</span>
-              <span class="bento-price-val">Starting ₹29,999</span>
-            </div>
-            <a href="#contact" onclick="selectServiceForContact('Shopify & Custom E-Commerce')" class="btn btn-primary btn-sm">
-              <span>Launch Store</span> <i>↗</i>
-            </a>
+          <div class="service-card-footer">
+            <span class="service-pricing-badge">Starting ₹29,999</span>
+            <a href="#contact" onclick="selectServiceForContact('Shopify & Custom E-Commerce')" class="btn btn-sm btn-secondary">Inquire ↗</a>
           </div>
         </div>
 
-        <!-- Bento 3: Instagram & Creative Branding (1 Col) -->
-        <div class="bento-card bento-span-1">
-          <div class="bento-top-badges">
-            <span class="bento-pill bento-pill-pink">📸 Social Scaling</span>
+        <!-- Service 3: Instagram & Creative Branding -->
+        <div class="service-card">
+          <div>
+            <div class="service-icon-box">📱</div>
+            <h3>Social Media & Instagram Branding</h3>
+            <p>Build a recognizable brand identity that turns scrollers into customers. Aesthetic feed design, high-converting video reel scripting, and community growth.</p>
+            <ul class="service-deliverables">
+              <li>Aesthetic Feed Grid Layouts & Carousel Strategies</li>
+              <li>Viral Reel Hooks, Voiceover Scripts & Video Edits</li>
+              <li>Official Instagram Community Outreach (<a href="https://www.instagram.com/kiora.tech/#" target="_blank" style="color:var(--cyan-bright);text-decoration:underline;">@kiora.tech</a>)</li>
+              <li>Direct Inbound DM & WhatsApp Funnel Setup</li>
+            </ul>
           </div>
-          <div class="bento-icon-lg">📱</div>
-          <h3 class="bento-title">Social Media & Instagram Branding</h3>
-          <p class="bento-desc">
-            Aesthetic feed grid curation, viral video reel hooks, voiceover scripts, and active community outreach with our official channel <a href="https://www.instagram.com/kiora.tech/#" target="_blank" style="color:var(--cyan-bright);text-decoration:underline;">@kiora.tech</a>.
-          </p>
-          <div class="bento-tech-tags">
-            <span>Viral Reels</span><span>Feed Aesthetic</span><span>Direct DM Funnels</span>
-          </div>
-          <div class="bento-footer">
-            <div class="bento-price-box">
-              <span class="bento-price-label">Monthly</span>
-              <span class="bento-price-val">₹12,999/mo</span>
-            </div>
-            <a href="https://www.instagram.com/kiora.tech/#" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
-              <span>@kiora.tech</span> <i>↗</i>
-            </a>
+          <div class="service-card-footer">
+            <span class="service-pricing-badge">Starting ₹12,999/mo</span>
+            <a href="#contact" onclick="selectServiceForContact('Social Media & Creative Branding')" class="btn btn-sm btn-secondary">Inquire ↗</a>
           </div>
         </div>
 
-        <!-- Bento 4: Performance SEO & Google Maps (1 Col) -->
-        <div class="bento-card bento-span-1">
-          <div class="bento-top-badges">
-            <span class="bento-pill bento-pill-teal">🎯 Page 1 Rankings</span>
+        <!-- Service 4: Custom Software & Automation -->
+        <div class="service-card">
+          <div>
+            <div class="service-icon-box">⚙️</div>
+            <h3>Custom Portals & Business Automation</h3>
+            <p>Automate repetitive business bottlenecks. Custom client dashboards, inventory trackers, automated WhatsApp bots, and streamlined internal portals.</p>
+            <ul class="service-deliverables">
+              <li>Client & Vendor Dashboards with Secure Access</li>
+              <li>Automated Invoicing & WhatsApp Notification Bots</li>
+              <li>Live Product Catalogs & Order Inquiry Management</li>
+              <li>REST APIs, Cloud Hosting & Node.js Architecture</li>
+            </ul>
           </div>
-          <div class="bento-icon-lg">📈</div>
-          <h3 class="bento-title">Performance SEO & Google Local Presence</h3>
-          <p class="bento-desc">
-            Dominate local searches with Google Business Profile (GMB) map optimization, schema rich snippets, and high-intent buyer organic traffic with zero continuous ad spend.
-          </p>
-          <div class="bento-tech-tags">
-            <span>Schema Markup</span><span>Google Maps</span><span>Core Web Vitals</span>
-          </div>
-          <div class="bento-footer">
-            <div class="bento-price-box">
-              <span class="bento-price-label">Monthly</span>
-              <span class="bento-price-val">Starting ₹9,999</span>
-            </div>
-            <a href="#contact" onclick="selectServiceForContact('Website Speed & Local SEO')" class="btn btn-secondary btn-sm">
-              <span>Inquire</span> <i>↗</i>
-            </a>
+          <div class="service-card-footer">
+            <span class="service-pricing-badge">Custom Quote</span>
+            <a href="#contact" onclick="selectServiceForContact('Custom Software & Automation')" class="btn btn-sm btn-secondary">Inquire ↗</a>
           </div>
         </div>
 
-        <!-- Bento 5: Custom Portals & Business Automation (1 Col) -->
-        <div class="bento-card bento-span-1">
-          <div class="bento-top-badges">
-            <span class="bento-pill bento-pill-cyan">⚙️ Automation</span>
+        <!-- Service 5: Website Speed & On-Page SEO -->
+        <div class="service-card">
+          <div>
+            <div class="service-icon-box">🎯</div>
+            <h3>Website Speed & Local Google Presence</h3>
+            <p>Ensure your website passes Google Core Web Vitals with flying colors and your business profile ranks locally so nearby buyers can call you directly.</p>
+            <ul class="service-deliverables">
+              <li>90+ Google PageSpeed Optimization & Audit</li>
+              <li>Google Business Profile (GMB) Local Map Optimization</li>
+              <li>High-Intent Local Search Schema & Metadata</li>
+              <li>Direct Click-to-Call & WhatsApp Lead Tracking</li>
+            </ul>
           </div>
-          <div class="bento-icon-lg">⚡</div>
-          <h3 class="bento-title">Custom Portals & Business Automation</h3>
-          <p class="bento-desc">
-            Automate client onboarding, vendor portals, automated PDF invoices, and interactive WhatsApp chat bots to eliminate manual bottlenecks.
-          </p>
-          <div class="bento-tech-tags">
-            <span>Client Portals</span><span>WhatsApp Bot</span><span>REST APIs</span>
-          </div>
-          <div class="bento-footer">
-            <div class="bento-price-box">
-              <span class="bento-price-label">Scope</span>
-              <span class="bento-price-val">Custom Quote</span>
-            </div>
-            <a href="#contact" onclick="selectServiceForContact('Custom Software & Automation')" class="btn btn-secondary btn-sm">
-              <span>Consult</span> <i>↗</i>
-            </a>
+          <div class="service-card-footer">
+            <span class="service-pricing-badge">Starting ₹9,999</span>
+            <a href="#contact" onclick="selectServiceForContact('Website Speed & Local SEO')" class="btn btn-sm btn-secondary">Inquire ↗</a>
           </div>
         </div>
 
-        <!-- Bento 6: Cataloging & Multi-Marketplace Scale (1 Col) -->
-        <div class="bento-card bento-span-1">
-          <div class="bento-top-badges">
-            <span class="bento-pill bento-pill-amber">📦 Marketplace</span>
+        <!-- Service 6: Cataloging & E-Commerce Support -->
+        <div class="service-card">
+          <div>
+            <div class="service-icon-box">📦</div>
+            <h3>Product Cataloging & Store Setup</h3>
+            <p>Professional product data preparation, clean image optimization, variant configuration, and seamless product catalog publishing for your online store.</p>
+            <ul class="service-deliverables">
+              <li>Clean Product Photography Optimization & Banners</li>
+              <li>Bullet-Point Benefit Copywriting & Variant Setup</li>
+              <li>Inventory Structuring & Category Taxonomies</li>
+              <li>Smooth Multi-Platform Product Data Migration</li>
+            </ul>
           </div>
-          <div class="bento-icon-lg">🏬</div>
-          <h3 class="bento-title">E-Commerce Cataloging & Multi-Channel</h3>
-          <p class="bento-desc">
-            High-converting A+ content, bullet benefit copywriting, professional product photography optimization, and Amazon/Flipkart listing synchronization.
-          </p>
-          <div class="bento-tech-tags">
-            <span>A+ Content</span><span>Flipkart Ads</span><span>Catalog Sync</span>
-          </div>
-          <div class="bento-footer">
-            <div class="bento-price-box">
-              <span class="bento-price-label">Starting</span>
-              <span class="bento-price-val">₹8,999</span>
-            </div>
-            <a href="#contact" onclick="selectServiceForContact('Cataloging & Store Setup')" class="btn btn-secondary btn-sm">
-              <span>Scale</span> <i>↗</i>
-            </a>
+          <div class="service-card-footer">
+            <span class="service-pricing-badge">Starting ₹8,999</span>
+            <a href="#contact" onclick="selectServiceForContact('Cataloging & Store Setup')" class="btn btn-sm btn-secondary">Inquire ↗</a>
           </div>
         </div>
       </div>
@@ -698,88 +624,7 @@
     </div>
   </section>
 
-  <!-- Vertical Video Reels / Shorts Showcase -->
-  <section class="section" id="reels-showcase">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag" style="background: linear-gradient(135deg, rgba(131, 58, 180, 0.2), rgba(253, 29, 29, 0.2)); border-color: #fd1d1d; color: #ff758c;">🎥 Inside KioraTech Studio</span>
-        <h2 class="section-title">Watch Our Process in Motion</h2>
-        <p class="section-subtitle">
-          Real web architecture breakdowns, client store transformations, and conversion secrets straight from our official Instagram channel <strong><a href="https://www.instagram.com/kiora.tech/#" target="_blank" rel="noopener" style="color:var(--cyan-bright);text-decoration:underline;">@kiora.tech</a></strong>.
-        </p>
-      </div>
 
-      <div class="reels-grid">
-        <!-- Reel 1 -->
-        <div class="phone-reel-card">
-          <div class="phone-bezel">
-            <div class="phone-notch"><span class="notch-cam"></span></div>
-            <div class="phone-screen">
-              <video id="reel-video-1" class="reel-video" loop playsinline preload="metadata">
-                <source src="videos/reel1.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-              <div class="reel-overlay">
-                <div class="reel-top-bar">
-                  <span class="reel-badge">🔥 WEB ARCHITECTURE</span>
-                  <button class="reel-sound-btn" data-video="reel-video-1" aria-label="Toggle Sound">🔇</button>
-                </div>
-                <div class="reel-play-center" data-video="reel-video-1">
-                  <span class="play-icon">▶</span>
-                </div>
-                <div class="reel-bottom-info">
-                  <div class="reel-author">
-                    <img src="images/logo.png" alt="KioraTech" class="reel-avatar">
-                    <span>@kiora.tech</span>
-                    <a href="https://www.instagram.com/kiora.tech/#" target="_blank" rel="noopener" class="reel-follow-btn">Follow</a>
-                  </div>
-                  <p class="reel-caption">How we engineer ultra-fast websites in 4 to 7 days with sub-second mobile speeds ⚡ #WebDevelopment #KioraTech</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="phone-card-footer">
-            <h4>Ultra-Fast Web Architecture (4–7 Days)</h4>
-            <a href="https://www.instagram.com/kiora.tech/#" target="_blank" rel="noopener" class="btn btn-sm btn-secondary">Watch on Instagram ↗</a>
-          </div>
-        </div>
-
-        <!-- Reel 2 -->
-        <div class="phone-reel-card">
-          <div class="phone-bezel">
-            <div class="phone-notch"><span class="notch-cam"></span></div>
-            <div class="phone-screen">
-              <video id="reel-video-2" class="reel-video" loop playsinline preload="metadata">
-                <source src="videos/reel2.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-              <div class="reel-overlay">
-                <div class="reel-top-bar">
-                  <span class="reel-badge">🛍️ D2C SCALING</span>
-                  <button class="reel-sound-btn" data-video="reel-video-2" aria-label="Toggle Sound">🔇</button>
-                </div>
-                <div class="reel-play-center" data-video="reel-video-2">
-                  <span class="play-icon">▶</span>
-                </div>
-                <div class="reel-bottom-info">
-                  <div class="reel-author">
-                    <img src="images/logo.png" alt="KioraTech" class="reel-avatar">
-                    <span>@kiora.tech</span>
-                    <a href="https://www.instagram.com/kiora.tech/#" target="_blank" rel="noopener" class="reel-follow-btn">Follow</a>
-                  </div>
-                  <p class="reel-caption">Shopify D2C store checkout secrets: How we reduce cart abandonment & scale orders! 🚀 #ShopifyD2C #ECommerce</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="phone-card-footer">
-            <h4>Shopify D2C Conversion Secrets</h4>
-            <a href="https://www.instagram.com/kiora.tech/#" target="_blank" rel="noopener" class="btn btn-sm btn-secondary">Watch on Instagram ↗</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- Dynamic Catalog & Packages (from Server) -->
   <section class="section" id="catalog">
@@ -1412,7 +1257,7 @@
     </div>
   </div>
 
-  <!-- Script Engine -->
-  <script src="js/main.js" defer></script>
+  <!-- Script Engine with Version Cache-Buster -->
+  <script src="js/main.js?v=4.0" defer></script>
 </body>
 </html>

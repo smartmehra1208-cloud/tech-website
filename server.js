@@ -77,9 +77,9 @@ app.use((err, req, res, next) => {
   next(err);
 });
 
-// Optimized Static Assets with HTTP Caching
+// Static Assets with Instant Refresh (zero stale cache for instant client updates)
 app.use(express.static(path.join(__dirname, 'public'), {
-  maxAge: '1h',
+  maxAge: 0,
   etag: true,
   lastModified: true
 }));

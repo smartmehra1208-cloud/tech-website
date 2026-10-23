@@ -248,12 +248,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initTyping();
   initTheme();
   initScrollEffects();
-  initBeforeAfterSlider();
+  initWorldGlobe();
   initPackageTabs();
   initFaqAccordion();
   initPriceCalculator();
   initRoiCalculator();
-  initReelsShowcase();
   initSocialProofToasts();
   initChatbot();
   initContactForm();
@@ -1238,147 +1237,298 @@ function escapeHtml(str) {
     .replace(/'/g, '&#039;');
 }
 
-// ================== 15. INTERACTIVE BEFORE VS AFTER SLIDER ==================
-function initBeforeAfterSlider() {
-  const container = document.getElementById('ba-slider-container');
-  const panelAfter = document.getElementById('ba-panel-after');
-  const handle = document.getElementById('ba-handle');
-  if (!container || !panelAfter || !handle) return;
+// ================== 15. INTERACTIVE 3D WORLD GLOBE ==================
+function initWorldGlobe() {
+  const canvas = document.getElementById('world-globe-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
 
+  const width = canvas.width || 520;
+  const height = canvas.height || 520;
+  const cx = width / 2;
+  const cy = height / 2;
+  const R = 180; // Sphere radius
+
+  let rotX = 1.35; // Longitude rotation
+  let rotY = 0.25; // Latitude tilt
   let isDragging = false;
+  let lastMouseX = 0;
+  let lastMouseY = 0;
+  let autoSpin = true;
+  let pulseTime = 0;
 
-  function updateSliderPosition(clientX) {
-    const rect = container.getBoundingClientRect();
-    let x = clientX - rect.left;
-    let percent = (x / rect.width) * 100;
-    if (percent < 5) percent = 5;
-    if (percent > 95) percent = 95;
+  // Key Global Hubs
+  const HUBS = [
+    { name: "Lucknow HQ 🇮🇳", lat: 26.85, lon: 80.95, isHQ: true },
+    { name: "Dubai UAE 🇦🇪", lat: 25.20, lon: 55.27, isHQ: false },
+    { name: "New York 🇺🇸", lat: 40.71, lon: -74.00, isHQ: false },
+    { name: "London UK 🇬🇧", lat: 51.51, lon: -0.13, isHQ: false },
+    { name: "Singapore 🇸🇬", lat: 1.35, lon: 103.82, isHQ: false },
+    { name: "Frankfurt 🇩🇪", lat: 50.11, lon: 8.68, isHQ: false }
+  ];
 
-    panelAfter.style.width = `${percent}%`;
-    handle.style.left = `${percent}%`;
+  // Great Circle Connections
+  const ARCS = [
+    { from: HUBS[0], to: HUBS[1] },
+    { from: HUBS[0], to: HUBS[2] },
+    { from: HUBS[0], to: HUBS[3] },
+    { from: HUBS[0], to: HUBS[4] },
+    { from: HUBS[0], to: HUBS[5] }
+  ];
+
+  // Deterministic continent coordinate clusters
+  const CONTINENT_POINTS = [];
+  function addCluster(minLat, maxLat, minLon, maxLon, count) {
+    for (let i = 0; i < count; i++) {
+      const lat = minLat + Math.random() * (maxLat - minLat);
+      const lon = minLon + Math.random() * (maxLon - minLon);
+      CONTINENT_POINTS.push({ lat, lon });
+    }
   }
 
-  container.addEventListener('mousedown', (e) => {
+  addCluster(8, 35, 68, 95, 110);    // India & South Asia
+  addCluster(15, 52, 95, 142, 90);   // East Asia
+  addCluster(14, 45, 42, 70, 60);    // Middle East
+  addCluster(36, 68, -10, 40, 85);   // Europe
+  addCluster(-34, 36, -16, 50, 110); // Africa
+  addCluster(18, 65, -135, -60, 120);// North America
+  addCluster(-54, 12, -80, -35, 75); // South America
+  addCluster(-42, -12, 114, 174, 50);// Australia & NZ
+
+  function project(latDeg, lonDeg) {
+    const latRad = (latDeg * Math.PI) / 180;
+    const lonRad = (lonDeg * Math.PI) / 180;
+
+    const x0 = Math.cos(latRad) * Math.sin(lonRad + rotX);
+    const y0 = Math.sin(latRad);
+    const z0 = Math.cos(latRad) * Math.cos(lonRad + rotX);
+
+    const y1 = y0 * Math.cos(rotY) - z0 * Math.sin(rotY);
+    const z1 = y0 * Math.sin(rotY) + z0 * Math.cos(rotY);
+
+    return {
+      x: cx + x0 * R,
+      y: cy - y1 * R,
+      z: z1,
+      visible: z1 > 0
+    };
+  }
+
+  function render() {
+    pulseTime += 0.04;
+    if (autoSpin && !isDragging) {
+      rotX += 0.0035;
+    }
+
+    ctx.clearRect(0, 0, width, height);
+
+    // 1. Atmosphere ambient glow
+    const atmGlow = ctx.createRadialGradient(cx, cy, R * 0.85, cx, cy, R * 1.25);
+    atmGlow.addColorStop(0, 'rgba(0, 240, 255, 0.16)');
+    atmGlow.addColorStop(0.5, 'rgba(16, 133, 143, 0.08)');
+    atmGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    ctx.fillStyle = atmGlow;
+    ctx.beginPath();
+    ctx.arc(cx, cy, R * 1.25, 0, Math.PI * 2);
+    ctx.fill();
+
+    // 2. Obsidian Sphere Body
+    const sphereGrad = ctx.createRadialGradient(cx - R * 0.35, cy - R * 0.35, R * 0.1, cx, cy, R);
+    sphereGrad.addColorStop(0, '#0d2238');
+    sphereGrad.addColorStop(0.65, '#071220');
+    sphereGrad.addColorStop(1, '#03070d');
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(cx, cy, R, 0, Math.PI * 2);
+    ctx.fillStyle = sphereGrad;
+    ctx.fill();
+
+    // Border stroke
+    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = 'rgba(0, 240, 255, 0.45)';
+    ctx.stroke();
+    ctx.clip(); // Clip to globe surface
+
+    // 3. Grid lines
+    ctx.lineWidth = 0.8;
+    for (let lat = -60; lat <= 60; lat += 30) {
+      ctx.beginPath();
+      let first = true;
+      for (let lon = -180; lon <= 180; lon += 8) {
+        const p = project(lat, lon);
+        if (p.visible) {
+          if (first) { ctx.moveTo(p.x, p.y); first = false; }
+          else { ctx.lineTo(p.x, p.y); }
+        } else {
+          first = true;
+        }
+      }
+      ctx.strokeStyle = 'rgba(75, 189, 189, 0.14)';
+      ctx.stroke();
+    }
+
+    for (let lon = -180; lon < 180; lon += 45) {
+      ctx.beginPath();
+      let first = true;
+      for (let lat = -80; lat <= 80; lat += 6) {
+        const p = project(lat, lon);
+        if (p.visible) {
+          if (first) { ctx.moveTo(p.x, p.y); first = false; }
+          else { ctx.lineTo(p.x, p.y); }
+        } else {
+          first = true;
+        }
+      }
+      ctx.strokeStyle = 'rgba(75, 189, 189, 0.14)';
+      ctx.stroke();
+    }
+
+    // 4. Continent Points
+    for (let i = 0; i < CONTINENT_POINTS.length; i++) {
+      const pt = CONTINENT_POINTS[i];
+      const p = project(pt.lat, pt.lon);
+      if (p.visible) {
+        const dotAlpha = 0.25 + (p.z * 0.7);
+        const dotRadius = 1.2 + (p.z * 1.2);
+        ctx.fillStyle = `rgba(0, 240, 255, ${dotAlpha})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, dotRadius, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    // 5. 3D Connection Arcs
+    const hqProj = project(HUBS[0].lat, HUBS[0].lon);
+
+    for (let i = 0; i < ARCS.length; i++) {
+      const dest = ARCS[i].to;
+      const destProj = project(dest.lat, dest.lon);
+
+      if (hqProj.visible || destProj.visible) {
+        const midLat = (HUBS[0].lat + dest.lat) / 2;
+        const midLon = (HUBS[0].lon + dest.lon) / 2;
+        const midProj = project(midLat, midLon);
+
+        const dx = midProj.x - cx;
+        const dy = midProj.y - cy;
+        const len = Math.hypot(dx, dy) || 1;
+        const liftX = midProj.x + (dx / len) * 35;
+        const liftY = midProj.y + (dy / len) * 35;
+
+        ctx.beginPath();
+        ctx.moveTo(hqProj.x, hqProj.y);
+        ctx.quadraticCurveTo(liftX, liftY, destProj.x, destProj.y);
+        ctx.strokeStyle = 'rgba(0, 240, 255, 0.38)';
+        ctx.lineWidth = 1.3;
+        ctx.setLineDash([4, 4]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        const t = (pulseTime * 0.4 + (i * 0.22)) % 1;
+        const px = Math.pow(1 - t, 2) * hqProj.x + 2 * (1 - t) * t * liftX + Math.pow(t, 2) * destProj.x;
+        const py = Math.pow(1 - t, 2) * hqProj.y + 2 * (1 - t) * t * liftY + Math.pow(t, 2) * destProj.y;
+
+        ctx.fillStyle = '#00f0ff';
+        ctx.shadowColor = '#00f0ff';
+        ctx.shadowBlur = 8;
+        ctx.beginPath();
+        ctx.arc(px, py, 2.8, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+    }
+
+    // 6. Hub Nodes & Pulsing Rings
+    for (let i = 0; i < HUBS.length; i++) {
+      const hub = HUBS[i];
+      const p = project(hub.lat, hub.lon);
+
+      if (p.visible) {
+        const isHQ = hub.isHQ;
+        const pinColor = isHQ ? '#10b981' : '#00f0ff';
+
+        const ripple = (pulseTime * 2.5 + i) % 12;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 4 + ripple, 0, Math.PI * 2);
+        ctx.strokeStyle = isHQ ? `rgba(16, 185, 129, ${1 - ripple / 12})` : `rgba(0, 240, 255, ${1 - ripple / 12})`;
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, isHQ ? 4.5 : 3.5, 0, Math.PI * 2);
+        ctx.fillStyle = pinColor;
+        ctx.shadowColor = pinColor;
+        ctx.shadowBlur = 10;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        ctx.font = isHQ ? 'bold 11px Plus Jakarta Sans, sans-serif' : '10px Plus Jakarta Sans, sans-serif';
+        ctx.fillStyle = isHQ ? '#34d399' : '#e0f7f7';
+        ctx.fillText(hub.name, p.x + 8, p.y - 6);
+      }
+    }
+
+    ctx.restore();
+    requestAnimationFrame(render);
+  }
+
+  render();
+
+  canvas.addEventListener('mousedown', (e) => {
     isDragging = true;
-    updateSliderPosition(e.clientX);
+    autoSpin = false;
+    lastMouseX = e.clientX;
+    lastMouseY = e.clientY;
   });
 
   window.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
-    updateSliderPosition(e.clientX);
+    const dx = e.clientX - lastMouseX;
+    const dy = e.clientY - lastMouseY;
+    rotX += dx * 0.008;
+    rotY += dy * 0.008;
+    if (rotY < -0.85) rotY = -0.85;
+    if (rotY > 0.85) rotY = 0.85;
+    lastMouseX = e.clientX;
+    lastMouseY = e.clientY;
   });
 
   window.addEventListener('mouseup', () => {
-    isDragging = false;
+    if (isDragging) {
+      isDragging = false;
+      setTimeout(() => { autoSpin = true; }, 3000);
+    }
   });
 
-  // Touch events for mobile phones and tablets
-  container.addEventListener('touchstart', (e) => {
+  canvas.addEventListener('touchstart', (e) => {
     if (e.touches.length > 0) {
       isDragging = true;
-      updateSliderPosition(e.touches[0].clientX);
+      autoSpin = false;
+      lastMouseX = e.touches[0].clientX;
+      lastMouseY = e.touches[0].clientY;
     }
   }, { passive: true });
 
   window.addEventListener('touchmove', (e) => {
     if (!isDragging || e.touches.length === 0) return;
-    updateSliderPosition(e.touches[0].clientX);
+    const dx = e.touches[0].clientX - lastMouseX;
+    const dy = e.touches[0].clientY - lastMouseY;
+    rotX += dx * 0.008;
+    rotY += dy * 0.008;
+    if (rotY < -0.85) rotY = -0.85;
+    if (rotY > 0.85) rotY = 0.85;
+    lastMouseX = e.touches[0].clientX;
+    lastMouseY = e.touches[0].clientY;
   }, { passive: true });
 
   window.addEventListener('touchend', () => {
-    isDragging = false;
+    if (isDragging) {
+      isDragging = false;
+      setTimeout(() => { autoSpin = true; }, 3000);
+    }
   });
-}
-
-// ================== 16. VERTICAL VIDEO REELS SHOWCASE ==================
-function initReelsShowcase() {
-  const soundBtns = document.querySelectorAll('.reel-sound-btn');
-  const playBtns = document.querySelectorAll('.reel-play-center');
-  const videos = document.querySelectorAll('.reel-video');
-
-  soundBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const videoId = btn.getAttribute('data-video');
-      const video = document.getElementById(videoId);
-      if (!video) return;
-
-      video.muted = !video.muted;
-      btn.textContent = video.muted ? '🔇' : '🔊';
-    });
-  });
-
-  playBtns.forEach(center => {
-    center.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const videoId = center.getAttribute('data-video');
-      const video = document.getElementById(videoId);
-      if (!video) return;
-
-      if (video.paused) {
-        videos.forEach(v => {
-          if (v !== video) {
-            v.pause();
-            const otherCenter = document.querySelector(`.reel-play-center[data-video="${v.id}"]`);
-            if (otherCenter) otherCenter.classList.remove('playing');
-          }
-        });
-        video.play().then(() => {
-          center.classList.add('playing');
-        }).catch(() => {});
-      } else {
-        video.pause();
-        center.classList.remove('playing');
-      }
-    });
-  });
-
-  videos.forEach(video => {
-    video.addEventListener('click', () => {
-      const center = document.querySelector(`.reel-play-center[data-video="${video.id}"]`);
-      if (video.paused) {
-        videos.forEach(v => {
-          if (v !== video) {
-            v.pause();
-            const otherCenter = document.querySelector(`.reel-play-center[data-video="${v.id}"]`);
-            if (otherCenter) otherCenter.classList.remove('playing');
-          }
-        });
-        video.play().then(() => {
-          if (center) center.classList.add('playing');
-        }).catch(() => {});
-      } else {
-        video.pause();
-        if (center) center.classList.remove('playing');
-      }
-    });
-
-    video.addEventListener('pause', () => {
-      const center = document.querySelector(`.reel-play-center[data-video="${video.id}"]`);
-      if (center) center.classList.remove('playing');
-    });
-
-    video.addEventListener('play', () => {
-      const center = document.querySelector(`.reel-play-center[data-video="${video.id}"]`);
-      if (center) center.classList.add('playing');
-    });
-  });
-
-  // IntersectionObserver to pause videos when scrolled out of view
-  const videoObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) {
-        const video = entry.target;
-        if (!video.paused) {
-          video.pause();
-          const center = document.querySelector(`.reel-play-center[data-video="${video.id}"]`);
-          if (center) center.classList.remove('playing');
-        }
-      }
-    });
-  }, { threshold: 0.25 });
-
-  videos.forEach(v => videoObserver.observe(v));
 }
 
 // ================== 17. SPEED & REVENUE ROI CALCULATOR ==================
