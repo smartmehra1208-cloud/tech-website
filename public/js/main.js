@@ -248,9 +248,13 @@ document.addEventListener('DOMContentLoaded', () => {
   initTyping();
   initTheme();
   initScrollEffects();
+  initBeforeAfterSlider();
   initPackageTabs();
   initFaqAccordion();
   initPriceCalculator();
+  initRoiCalculator();
+  initReelsShowcase();
+  initSocialProofToasts();
   initChatbot();
   initContactForm();
   loadDataFromServer();
@@ -608,19 +612,32 @@ function renderProjects(projects) {
   container.innerHTML = projects.map(p => {
     const isLive = p.categoryLabel && p.categoryLabel.toLowerCase().includes('live');
     const hasLiveUrl = p.liveUrl && p.liveUrl !== '#' && p.liveUrl.startsWith('http');
+    const displayUrl = hasLiveUrl ? p.liveUrl.replace(/^https?:\/\//, '').replace(/\/$/, '') : 'kioratech.com/preview';
 
     return `
       <div class="project-card animate-card ${isLive ? 'live-client-card' : ''}" data-category="${p.category}">
-        <div class="project-card-image">
-          <img src="${p.image || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80'}" alt="${escapeHtml(p.title)}" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80';">
-          ${isLive 
-            ? `<span class="project-card-badge" style="background: rgba(16, 185, 129, 0.25); border-color: #10b981; color: #34d399; font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
-                <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#10b981;box-shadow:0 0 8px #10b981;"></span> LIVE CLIENT SITE
-               </span>`
-            : `<span class="project-card-badge">${escapeHtml(p.categoryLabel || p.category)}</span>`
-          }
-          <span class="project-card-metric">${escapeHtml(p.result || 'Top Performer')}</span>
+        <!-- macOS Safari Device Mockup Frame -->
+        <div class="mac-browser-frame">
+          <div class="mac-browser-top">
+            <div class="mac-dots">
+              <span class="mac-dot red"></span>
+              <span class="mac-dot yellow"></span>
+              <span class="mac-dot green"></span>
+            </div>
+            <div class="mac-address-bar">
+              🔒 https://${escapeHtml(displayUrl)}
+            </div>
+            ${isLive 
+              ? `<span class="mac-live-pill"><span style="width:6px;height:6px;border-radius:50%;background:#10b981;display:inline-block;box-shadow:0 0 6px #10b981;"></span> LIVE</span>` 
+              : `<span class="mac-live-pill" style="border-color:var(--border-subtle);color:var(--text-muted);background:transparent;">PREVIEW</span>`
+            }
+          </div>
+          <div class="mac-browser-viewport">
+            <img src="${p.image || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80'}" alt="${escapeHtml(p.title)}" class="scroll-preview-img" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80';">
+            <span class="project-card-metric">${escapeHtml(p.result || 'Top Performer')}</span>
+          </div>
         </div>
+
         <div class="project-card-body">
           <div>
             <h3>${escapeHtml(p.title)}</h3>
@@ -1219,4 +1236,322 @@ function escapeHtml(str) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
+}
+
+// ================== 15. INTERACTIVE BEFORE VS AFTER SLIDER ==================
+function initBeforeAfterSlider() {
+  const container = document.getElementById('ba-slider-container');
+  const panelAfter = document.getElementById('ba-panel-after');
+  const handle = document.getElementById('ba-handle');
+  if (!container || !panelAfter || !handle) return;
+
+  let isDragging = false;
+
+  function updateSliderPosition(clientX) {
+    const rect = container.getBoundingClientRect();
+    let x = clientX - rect.left;
+    let percent = (x / rect.width) * 100;
+    if (percent < 5) percent = 5;
+    if (percent > 95) percent = 95;
+
+    panelAfter.style.width = `${percent}%`;
+    handle.style.left = `${percent}%`;
+  }
+
+  container.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    updateSliderPosition(e.clientX);
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    updateSliderPosition(e.clientX);
+  });
+
+  window.addEventListener('mouseup', () => {
+    isDragging = false;
+  });
+
+  // Touch events for mobile phones and tablets
+  container.addEventListener('touchstart', (e) => {
+    if (e.touches.length > 0) {
+      isDragging = true;
+      updateSliderPosition(e.touches[0].clientX);
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    if (!isDragging || e.touches.length === 0) return;
+    updateSliderPosition(e.touches[0].clientX);
+  }, { passive: true });
+
+  window.addEventListener('touchend', () => {
+    isDragging = false;
+  });
+}
+
+// ================== 16. VERTICAL VIDEO REELS SHOWCASE ==================
+function initReelsShowcase() {
+  const soundBtns = document.querySelectorAll('.reel-sound-btn');
+  const playBtns = document.querySelectorAll('.reel-play-center');
+  const videos = document.querySelectorAll('.reel-video');
+
+  soundBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const videoId = btn.getAttribute('data-video');
+      const video = document.getElementById(videoId);
+      if (!video) return;
+
+      video.muted = !video.muted;
+      btn.textContent = video.muted ? '🔇' : '🔊';
+    });
+  });
+
+  playBtns.forEach(center => {
+    center.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const videoId = center.getAttribute('data-video');
+      const video = document.getElementById(videoId);
+      if (!video) return;
+
+      if (video.paused) {
+        videos.forEach(v => {
+          if (v !== video) {
+            v.pause();
+            const otherCenter = document.querySelector(`.reel-play-center[data-video="${v.id}"]`);
+            if (otherCenter) otherCenter.classList.remove('playing');
+          }
+        });
+        video.play().then(() => {
+          center.classList.add('playing');
+        }).catch(() => {});
+      } else {
+        video.pause();
+        center.classList.remove('playing');
+      }
+    });
+  });
+
+  videos.forEach(video => {
+    video.addEventListener('click', () => {
+      const center = document.querySelector(`.reel-play-center[data-video="${video.id}"]`);
+      if (video.paused) {
+        videos.forEach(v => {
+          if (v !== video) {
+            v.pause();
+            const otherCenter = document.querySelector(`.reel-play-center[data-video="${v.id}"]`);
+            if (otherCenter) otherCenter.classList.remove('playing');
+          }
+        });
+        video.play().then(() => {
+          if (center) center.classList.add('playing');
+        }).catch(() => {});
+      } else {
+        video.pause();
+        if (center) center.classList.remove('playing');
+      }
+    });
+
+    video.addEventListener('pause', () => {
+      const center = document.querySelector(`.reel-play-center[data-video="${video.id}"]`);
+      if (center) center.classList.remove('playing');
+    });
+
+    video.addEventListener('play', () => {
+      const center = document.querySelector(`.reel-play-center[data-video="${video.id}"]`);
+      if (center) center.classList.add('playing');
+    });
+  });
+
+  // IntersectionObserver to pause videos when scrolled out of view
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) {
+        const video = entry.target;
+        if (!video.paused) {
+          video.pause();
+          const center = document.querySelector(`.reel-play-center[data-video="${video.id}"]`);
+          if (center) center.classList.remove('playing');
+        }
+      }
+    });
+  }, { threshold: 0.25 });
+
+  videos.forEach(v => videoObserver.observe(v));
+}
+
+// ================== 17. SPEED & REVENUE ROI CALCULATOR ==================
+function initRoiCalculator() {
+  // Tab switching
+  const tabBtns = document.querySelectorAll('.calc-tab-btn');
+  const tabPanes = document.querySelectorAll('.calc-tab-pane');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-tab');
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      tabPanes.forEach(pane => {
+        pane.style.display = (pane.id === targetId) ? 'block' : 'none';
+      });
+    });
+  });
+
+  // Sliders & outputs
+  const visitorsSlider = document.getElementById('roi-visitors-slider');
+  const aovSlider = document.getElementById('roi-aov-slider');
+  const speedSlider = document.getElementById('roi-speed-slider');
+
+  const visitorsVal = document.getElementById('roi-visitors-val');
+  const aovVal = document.getElementById('roi-aov-val');
+  const speedVal = document.getElementById('roi-speed-val');
+
+  const speedDelta = document.getElementById('roi-speed-delta');
+  const convLift = document.getElementById('roi-conv-lift');
+  const monthlyLift = document.getElementById('roi-monthly-lift');
+  const annualLift = document.getElementById('roi-annual-lift');
+  const paybackDays = document.getElementById('roi-payback-days');
+  const whatsappBtn = document.getElementById('roi-whatsapp-btn');
+
+  if (!visitorsSlider || !aovSlider || !speedSlider) return;
+
+  function calculateRoi() {
+    const visitors = parseInt(visitorsSlider.value, 10) || 25000;
+    const aov = parseInt(aovSlider.value, 10) || 1500;
+    const currentSpeed = parseFloat(speedSlider.value) || 4.5;
+    const targetSpeed = 0.8; // KioraTech standard
+
+    // Display formatted values
+    visitorsVal.textContent = `${visitors.toLocaleString('en-IN')} visitors`;
+    aovVal.textContent = `₹${aov.toLocaleString('en-IN')}`;
+    speedVal.textContent = `${currentSpeed.toFixed(1)} Seconds`;
+
+    const delta = Math.max(0, currentSpeed - targetSpeed);
+    speedDelta.textContent = `${delta.toFixed(1)}s Faster`;
+
+    // 7% conversion lift per 1 second of speed improvement (Google benchmark)
+    const liftPercent = delta * 7.0;
+    convLift.textContent = `+${liftPercent.toFixed(1)}%`;
+
+    // Baseline conversion rate: 2.0%
+    const baselineOrders = visitors * 0.02;
+    const additionalOrders = baselineOrders * (liftPercent / 100);
+    const monthlyGain = Math.round(additionalOrders * aov);
+    const annualGain = Math.round(monthlyGain * 12);
+
+    monthlyLift.textContent = `₹${monthlyGain.toLocaleString('en-IN')}`;
+
+    if (annualGain >= 10000000) {
+      annualLift.textContent = `₹${(annualGain / 10000000).toFixed(2)} Crore`;
+    } else if (annualGain >= 100000) {
+      annualLift.textContent = `₹${(annualGain / 100000).toFixed(2)} Lakhs`;
+    } else {
+      annualLift.textContent = `₹${annualGain.toLocaleString('en-IN')}`;
+    }
+
+    // Payback calculation based on standard package
+    const packageCost = 29999;
+    const dailyGain = monthlyGain / 30;
+    const days = dailyGain > 0 ? Math.ceil(packageCost / dailyGain) : 30;
+
+    paybackDays.textContent = days <= 1 ? "Within 24 Hours!" : (days <= 30 ? `Within ${days} Days!` : "Within 2 Months!");
+
+    // Dynamic WhatsApp quote message
+    if (whatsappBtn) {
+      const num = APP_STATE.settings?.whatsapp || '919219461302';
+      const msg = `Hi KioraTech! I calculated my Speed ROI on your website:\n` +
+        `• Monthly Visitors: ${visitors.toLocaleString('en-IN')}\n` +
+        `• Current Load Speed: ${currentSpeed.toFixed(1)}s\n` +
+        `• Projected Monthly Revenue Uplift: ₹${monthlyGain.toLocaleString('en-IN')}\n` +
+        `I want to upgrade my website to sub-1s speed in 4-7 days. Let's discuss!`;
+      whatsappBtn.href = `https://wa.me/${num}?text=${encodeURIComponent(msg)}`;
+    }
+  }
+
+  visitorsSlider.addEventListener('input', calculateRoi);
+  aovSlider.addEventListener('input', calculateRoi);
+  speedSlider.addEventListener('input', calculateRoi);
+  calculateRoi();
+}
+
+// ================== 18. SOCIAL PROOF LIVE NOTIFICATION TOAST ==================
+function initSocialProofToasts() {
+  const toast = document.getElementById('social-proof-toast');
+  const title = document.getElementById('toast-title');
+  const text = document.getElementById('toast-text');
+  const time = document.getElementById('toast-time');
+  const avatar = document.getElementById('toast-avatar');
+  const closeBtn = document.getElementById('toast-close-btn');
+
+  if (!toast || !title || !text) return;
+
+  const proofEvents = [
+    {
+      avatar: "🌿",
+      title: "Organic Sanjeevani Roots",
+      text: "Sub-1s mobile speed & 1-click WhatsApp checkout live!",
+      time: "2 mins ago • Lucknow, UP"
+    },
+    {
+      avatar: "📦",
+      title: "Kiyan Export & Manufacturing",
+      text: "14 new global bulk inquiries generated from UAE & USA!",
+      time: "9 mins ago • Global Exporter"
+    },
+    {
+      avatar: "🛍️",
+      title: "Shopify D2C Brand Launch",
+      text: "Custom high-converting store delivered in 5 days!",
+      time: "24 mins ago • Delhi NCR"
+    },
+    {
+      avatar: "📸",
+      title: "@kiora.tech Instagram",
+      text: "New Reel: 'How We Build Sub-Second Stores in 4–7 Days' is live!",
+      time: "1 hour ago • Official Channel"
+    },
+    {
+      avatar: "⚡",
+      title: "Google Core Web Vitals",
+      text: "Client website achieved 99/100 PageSpeed score!",
+      time: "3 hours ago • Verified Audit"
+    }
+  ];
+
+  let currentIdx = 0;
+  let isClosed = false;
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toast.classList.remove('show');
+      isClosed = true;
+      setTimeout(() => { isClosed = false; }, 45000);
+    });
+  }
+
+  function showNextToast() {
+    if (isClosed) return;
+
+    const event = proofEvents[currentIdx];
+    avatar.textContent = event.avatar;
+    title.textContent = event.title;
+    text.textContent = event.text;
+    time.textContent = event.time;
+
+    toast.classList.add('show');
+
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 5500);
+
+    currentIdx = (currentIdx + 1) % proofEvents.length;
+  }
+
+  setTimeout(() => {
+    showNextToast();
+    setInterval(showNextToast, 16000);
+  }, 4500);
 }

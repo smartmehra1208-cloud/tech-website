@@ -110,9 +110,11 @@
       </a>
 
       <ul class="nav-links" id="nav-links">
+        <li><a href="#transformation">Speed Test</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#web-packages">Packages</a></li>
         <li><a href="#portfolio">Work</a></li>
+        <li><a href="#reels-showcase">Reels 🎥</a></li>
         <li><a href="#catalog">Catalog</a></li>
         <li><a href="#calculator">Estimator</a></li>
         <li><a href="#process">Process</a></li>
@@ -152,6 +154,11 @@
 
   <!-- Hero Section -->
   <section class="hero-section" id="hero">
+    <div class="hero-aurora-mesh">
+      <div class="aurora-orb aurora-orb-1"></div>
+      <div class="aurora-orb aurora-orb-2"></div>
+      <div class="aurora-orb aurora-orb-3"></div>
+    </div>
     <canvas id="hero-canvas"></canvas>
     
     <div class="container hero-grid">
@@ -281,129 +288,289 @@
     </div>
   </section>
 
-  <!-- Services Hub -->
+  <!-- Interactive Before vs After Transformation Slider -->
+  <section class="section" id="transformation">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag" style="background: rgba(0, 240, 255, 0.15); border-color: var(--cyan-bright); color: var(--cyan-bright);">⚡ Proof of Engineering</span>
+        <h2 class="section-title">The KioraTech Transformation</h2>
+        <p class="section-subtitle">
+          See the dramatic difference between a slow, outdated legacy website and a lightning-fast, high-converting KioraTech growth engine. Drag or tap the slider below to compare!
+        </p>
+      </div>
+
+      <div class="ba-slider-wrapper">
+        <div class="ba-slider-container" id="ba-slider-container">
+          <!-- BEFORE: Outdated Legacy Website -->
+          <div class="ba-panel ba-panel-before">
+            <div class="ba-badge ba-badge-before">❌ Standard / Slow Legacy Site</div>
+            <div class="ba-mockup-inner">
+              <div class="ba-browser-bar before-bar">
+                <div class="ba-traffic-dots"><span class="ba-dot red"></span><span class="ba-dot yellow"></span><span class="ba-dot green"></span></div>
+                <div class="ba-url-bar">⚠️ slow-legacy-store.in (Not Secure • Uncompressed)</div>
+              </div>
+              <div class="ba-content-preview before-content">
+                <div class="ba-metrics-row">
+                  <div class="ba-metric-pill metric-bad">⏳ 4.8s Mobile Load</div>
+                  <div class="ba-metric-pill metric-bad">📉 PageSpeed 32/100</div>
+                  <div class="ba-metric-pill metric-bad">🚫 68% Bounce Rate</div>
+                </div>
+                <div class="ba-visual-card bad-visual">
+                  <div class="bad-banner">⚠️ Warning: High Cart Abandonment & Lost Customers</div>
+                  <div class="bad-wireframe-grid">
+                    <div class="bad-block"><span>Broken Layout</span></div>
+                    <div class="bad-block"><span>No UPI / WhatsApp</span></div>
+                    <div class="bad-block"><span>Laggy Scrolling</span></div>
+                  </div>
+                  <div class="bad-checkout-box">
+                    <span>❌ 5-Step Complex Checkout Form (82% Drop-Off)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AFTER: KioraTech Engine (Width controlled by slider) -->
+          <div class="ba-panel ba-panel-after" id="ba-panel-after">
+            <div class="ba-badge ba-badge-after">⚡ KioraTech Growth Engine</div>
+            <div class="ba-mockup-inner">
+              <div class="ba-browser-bar after-bar">
+                <div class="ba-traffic-dots"><span class="ba-dot red"></span><span class="ba-dot yellow"></span><span class="ba-dot green"></span></div>
+                <div class="ba-url-bar">🔒 organicsanjeevaniroots.com (Sub-1s SSL • Cloudflare Edge)</div>
+              </div>
+              <div class="ba-content-preview after-content">
+                <div class="ba-metrics-row">
+                  <div class="ba-metric-pill metric-good">⚡ 0.8s Mobile Speed</div>
+                  <div class="ba-metric-pill metric-good">🚀 PageSpeed 99/100</div>
+                  <div class="ba-metric-pill metric-good">📈 +340% Sales Velocity</div>
+                </div>
+                <div class="ba-visual-card good-visual">
+                  <div class="good-banner">✨ "We Build, You Rule." — Verified 4–7 Days Delivery Guarantee</div>
+                  <div class="good-wireframe-grid">
+                    <div class="good-block"><span>🚀 Cloudflare CDN</span></div>
+                    <div class="good-block"><span>💬 1-Click WhatsApp</span></div>
+                    <div class="good-block"><span>🟢 Top Google SEO</span></div>
+                  </div>
+                  <div class="good-checkout-box">
+                    <span>✅ Instant 1-Click WhatsApp & Razorpay UPI Checkout (99.4% Success)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Drag Handle -->
+          <div class="ba-handle" id="ba-handle">
+            <div class="ba-handle-line"></div>
+            <div class="ba-handle-button">
+              <span>◀ ▶</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ba-slider-hint">
+          <span>👈 <strong>Drag or tap</strong> horizontally to compare Before vs. After 👉</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Hub with Modern Apple/Linear Bento Grid -->
   <section class="section alt-bg" id="services">
     <div class="container">
       <div class="section-header">
         <span class="section-tag">What We Deliver</span>
-        <h2 class="section-title" id="services-sec-title">Our Core Web & Digital Capabilities</h2>
+        <h2 class="section-title" id="services-sec-title">Engineered For Explosive Growth</h2>
         <p class="section-subtitle">
-          From bespoke high-converting websites and full-fledged Shopify D2C stores to social brand presence — we engineer digital platforms that convert visitors into paying clients in <strong>4 to 7 days</strong>.
+          From high-performance custom websites and bespoke Shopify D2C stores to viral social brand presence — engineered and delivered in <strong>4 to 7 days</strong>.
         </p>
       </div>
 
-      <div class="services-grid">
-        <!-- Service 1: Web Development -->
-        <div class="service-card highlight-card">
-          <div>
-            <div class="service-icon-box">💻</div>
-            <h3>Custom Web & App Development</h3>
-            <p>From conversion-focused business websites to corporate portals and full-stack web applications engineered for speed, mobile responsiveness, and client conversion.</p>
-            <ul class="service-deliverables">
-              <li>100% Mobile Responsive & Sub-1.5s Ultra-Fast Load</li>
-              <li>Lightning-Fast Delivery in <strong>4 to 7 Days</strong></li>
-              <li>Lead Capture Forms & Direct WhatsApp Instant Sync</li>
-              <li>Built-in On-Page SEO Architecture & Schema Markup</li>
-            </ul>
+      <div class="bento-grid">
+        <!-- Bento 1: Custom Web & App Development (Hero Bento 2-Col) -->
+        <div class="bento-card bento-span-2 bento-hero">
+          <div class="bento-glow"></div>
+          <div class="bento-top-badges">
+            <span class="bento-pill bento-pill-cyan">💻 Flagship Core</span>
+            <span class="bento-pill bento-pill-emerald">⚡ 4 to 7 Days Delivery</span>
           </div>
-          <div class="service-card-footer">
-            <span class="service-pricing-badge">Starting ₹14,999</span>
-            <a href="#contact" onclick="selectServiceForContact('Custom Web & App Development')" class="btn btn-sm btn-secondary">Inquire ↗</a>
+          <div class="bento-body">
+            <div class="bento-icon-lg">💻</div>
+            <h3 class="bento-title">High-Performance Websites & Full-Stack Apps</h3>
+            <p class="bento-desc">
+              Custom corporate portals, responsive web platforms, and dynamic web apps engineered with sub-second speeds, zero bloatware, and Google PageSpeed 99+ guarantee.
+            </p>
+            
+            <!-- Live Speed Gauge Showcase inside Bento Card -->
+            <div class="bento-speed-widget">
+              <div class="bento-gauge">
+                <svg viewBox="0 0 100 100" class="gauge-svg">
+                  <circle cx="50" cy="50" r="42" class="gauge-bg"></circle>
+                  <circle cx="50" cy="50" r="42" class="gauge-fill"></circle>
+                </svg>
+                <div class="gauge-text">
+                  <span class="gauge-val">99</span>
+                  <span class="gauge-lbl">PageSpeed</span>
+                </div>
+              </div>
+              <div class="bento-metrics-col">
+                <div class="bento-metric-row"><span>⏱️ First Contentful Paint:</span> <strong>0.6s</strong></div>
+                <div class="bento-metric-row"><span>📱 Mobile Responsiveness:</span> <strong>100%</strong></div>
+                <div class="bento-metric-row"><span>🔒 Security & CDN:</span> <strong>Cloudflare SSL</strong></div>
+              </div>
+            </div>
+
+            <div class="bento-tech-tags">
+              <span>Next.js</span><span>React</span><span>Node.js</span><span>PWA</span><span>Tailwind</span><span>Cloudflare CDN</span>
+            </div>
+          </div>
+          <div class="bento-footer">
+            <div class="bento-price-box">
+              <span class="bento-price-label">Investment</span>
+              <span class="bento-price-val">Starting ₹14,999</span>
+            </div>
+            <a href="#contact" onclick="selectServiceForContact('Custom Web & App Development')" class="btn btn-primary btn-sm">
+              <span>Start Project</span> <i>↗</i>
+            </a>
           </div>
         </div>
 
-        <!-- Service 2: Shopify & D2C Stores -->
-        <div class="service-card highlight-card">
-          <div>
-            <div class="service-icon-box">🛍️</div>
-            <h3>Shopify & D2C E-Commerce Stores</h3>
-            <p>Launch your brand online with complete control. High-converting D2C storefronts, seamless UPI/COD checkout, product catalogs, and automated WhatsApp tracking.</p>
-            <ul class="service-deliverables">
-              <li>Custom Premium Shopify Theme Setup & Branding</li>
-              <li>Razorpay, PhonePe, Cashfree & Cash on Delivery (COD)</li>
-              <li>Automated WhatsApp Order & Tracking Notifications</li>
-              <li>Proven by Live Clients like <em>Organic Sanjeevani Roots</em></li>
-            </ul>
+        <!-- Bento 2: Shopify D2C Stores (Hero Bento 2-Col) -->
+        <div class="bento-card bento-span-2 bento-shopify">
+          <div class="bento-glow"></div>
+          <div class="bento-top-badges">
+            <span class="bento-pill bento-pill-purple">🛍️ D2C Store Engine</span>
+            <span class="bento-pill bento-pill-emerald">Instant WhatsApp Checkout</span>
           </div>
-          <div class="service-card-footer">
-            <span class="service-pricing-badge">Starting ₹29,999</span>
-            <a href="#contact" onclick="selectServiceForContact('Shopify & Custom E-Commerce')" class="btn btn-sm btn-secondary">Inquire ↗</a>
+          <div class="bento-body">
+            <div class="bento-icon-lg">🛒</div>
+            <h3 class="bento-title">Shopify & Custom D2C E-Commerce Stores</h3>
+            <p class="bento-desc">
+              Launch an online storefront that turns visitors into repeat paying clients. Seamless Razorpay UPI, COD order verification, and automated WhatsApp order tracking.
+            </p>
+
+            <!-- Store Mockup Mini Preview -->
+            <div class="bento-store-preview">
+              <div class="store-mini-item">
+                <span class="store-live-dot"></span>
+                <span>Live Client: <strong>Organic Sanjeevani Roots</strong></span>
+                <span class="store-badge-teal">Sub-1s Mobile</span>
+              </div>
+              <div class="store-features-row">
+                <div class="sf-pill">💳 Razorpay / PhonePe / COD</div>
+                <div class="sf-pill">💬 1-Click WhatsApp Order</div>
+                <div class="sf-pill">📦 Automated WhatsApp Alerts</div>
+              </div>
+            </div>
+
+            <div class="bento-tech-tags">
+              <span>Shopify Liquid</span><span>Razorpay UPI</span><span>COD Protection</span><span>Abandoned Cart Recovery</span>
+            </div>
+          </div>
+          <div class="bento-footer">
+            <div class="bento-price-box">
+              <span class="bento-price-label">Investment</span>
+              <span class="bento-price-val">Starting ₹29,999</span>
+            </div>
+            <a href="#contact" onclick="selectServiceForContact('Shopify & Custom E-Commerce')" class="btn btn-primary btn-sm">
+              <span>Launch Store</span> <i>↗</i>
+            </a>
           </div>
         </div>
 
-        <!-- Service 3: Instagram & Creative Branding -->
-        <div class="service-card">
-          <div>
-            <div class="service-icon-box">📱</div>
-            <h3>Social Media & Instagram Branding</h3>
-            <p>Build a recognizable brand identity that turns scrollers into customers. Aesthetic feed design, high-converting video reel scripting, and community growth.</p>
-            <ul class="service-deliverables">
-              <li>Aesthetic Feed Grid Layouts & Carousel Strategies</li>
-              <li>Viral Reel Hooks, Voiceover Scripts & Video Edits</li>
-              <li>Official Instagram Community Outreach (<a href="https://www.instagram.com/kiora.tech/#" target="_blank" style="color:var(--accent-glow);">@kiora.tech</a>)</li>
-              <li>Direct Inbound DM & WhatsApp Funnel Setup</li>
-            </ul>
+        <!-- Bento 3: Instagram & Creative Branding (1 Col) -->
+        <div class="bento-card bento-span-1">
+          <div class="bento-top-badges">
+            <span class="bento-pill bento-pill-pink">📸 Social Scaling</span>
           </div>
-          <div class="service-card-footer">
-            <span class="service-pricing-badge">Starting ₹12,999/mo</span>
-            <a href="#contact" onclick="selectServiceForContact('Social Media & Creative Branding')" class="btn btn-sm btn-secondary">Inquire ↗</a>
+          <div class="bento-icon-lg">📱</div>
+          <h3 class="bento-title">Social Media & Instagram Branding</h3>
+          <p class="bento-desc">
+            Aesthetic feed grid curation, viral video reel hooks, voiceover scripts, and active community outreach with our official channel <a href="https://www.instagram.com/kiora.tech/#" target="_blank" style="color:var(--cyan-bright);text-decoration:underline;">@kiora.tech</a>.
+          </p>
+          <div class="bento-tech-tags">
+            <span>Viral Reels</span><span>Feed Aesthetic</span><span>Direct DM Funnels</span>
           </div>
-        </div>
-
-        <!-- Service 4: Custom Software & Automation -->
-        <div class="service-card">
-          <div>
-            <div class="service-icon-box">⚙️</div>
-            <h3>Custom Portals & Business Automation</h3>
-            <p>Automate repetitive business bottlenecks. Custom client dashboards, inventory trackers, automated WhatsApp bots, and streamlined internal portals.</p>
-            <ul class="service-deliverables">
-              <li>Client & Vendor Dashboards with Secure Access</li>
-              <li>Automated Invoicing & WhatsApp Notification Bots</li>
-              <li>Live Product Catalogs & Order Inquiry Management</li>
-              <li>REST APIs, Cloud Hosting & Node.js Architecture</li>
-            </ul>
-          </div>
-          <div class="service-card-footer">
-            <span class="service-pricing-badge">Custom Quote</span>
-            <a href="#contact" onclick="selectServiceForContact('Custom Software & Automation')" class="btn btn-sm btn-secondary">Inquire ↗</a>
+          <div class="bento-footer">
+            <div class="bento-price-box">
+              <span class="bento-price-label">Monthly</span>
+              <span class="bento-price-val">₹12,999/mo</span>
+            </div>
+            <a href="https://www.instagram.com/kiora.tech/#" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+              <span>@kiora.tech</span> <i>↗</i>
+            </a>
           </div>
         </div>
 
-        <!-- Service 5: Website Speed & On-Page SEO -->
-        <div class="service-card">
-          <div>
-            <div class="service-icon-box">🎯</div>
-            <h3>Website Speed & Local Google Presence</h3>
-            <p>Ensure your website passes Google Core Web Vitals with flying colors and your business profile ranks locally so nearby buyers can call you directly.</p>
-            <ul class="service-deliverables">
-              <li>90+ Google PageSpeed Optimization & Audit</li>
-              <li>Google Business Profile (GMB) Local Map Optimization</li>
-              <li>High-Intent Local Search Schema & Metadata</li>
-              <li>Direct Click-to-Call & WhatsApp Lead Tracking</li>
-            </ul>
+        <!-- Bento 4: Performance SEO & Google Maps (1 Col) -->
+        <div class="bento-card bento-span-1">
+          <div class="bento-top-badges">
+            <span class="bento-pill bento-pill-teal">🎯 Page 1 Rankings</span>
           </div>
-          <div class="service-card-footer">
-            <span class="service-pricing-badge">Starting ₹9,999</span>
-            <a href="#contact" onclick="selectServiceForContact('Website Speed & Local SEO')" class="btn btn-sm btn-secondary">Inquire ↗</a>
+          <div class="bento-icon-lg">📈</div>
+          <h3 class="bento-title">Performance SEO & Google Local Presence</h3>
+          <p class="bento-desc">
+            Dominate local searches with Google Business Profile (GMB) map optimization, schema rich snippets, and high-intent buyer organic traffic with zero continuous ad spend.
+          </p>
+          <div class="bento-tech-tags">
+            <span>Schema Markup</span><span>Google Maps</span><span>Core Web Vitals</span>
+          </div>
+          <div class="bento-footer">
+            <div class="bento-price-box">
+              <span class="bento-price-label">Monthly</span>
+              <span class="bento-price-val">Starting ₹9,999</span>
+            </div>
+            <a href="#contact" onclick="selectServiceForContact('Website Speed & Local SEO')" class="btn btn-secondary btn-sm">
+              <span>Inquire</span> <i>↗</i>
+            </a>
           </div>
         </div>
 
-        <!-- Service 6: Cataloging & E-Commerce Support -->
-        <div class="service-card">
-          <div>
-            <div class="service-icon-box">📦</div>
-            <h3>Product Cataloging & Store Setup</h3>
-            <p>Professional product data preparation, clean image optimization, variant configuration, and seamless product catalog publishing for your online store.</p>
-            <ul class="service-deliverables">
-              <li>Clean Product Photography Optimization & Banners</li>
-              <li>Bullet-Point Benefit Copywriting & Variant Setup</li>
-              <li>Inventory Structuring & Category Taxonomies</li>
-              <li>Smooth Multi-Platform Product Data Migration</li>
-            </ul>
+        <!-- Bento 5: Custom Portals & Business Automation (1 Col) -->
+        <div class="bento-card bento-span-1">
+          <div class="bento-top-badges">
+            <span class="bento-pill bento-pill-cyan">⚙️ Automation</span>
           </div>
-          <div class="service-card-footer">
-            <span class="service-pricing-badge">Starting ₹8,999</span>
-            <a href="#contact" onclick="selectServiceForContact('Cataloging & Store Setup')" class="btn btn-sm btn-secondary">Inquire ↗</a>
+          <div class="bento-icon-lg">⚡</div>
+          <h3 class="bento-title">Custom Portals & Business Automation</h3>
+          <p class="bento-desc">
+            Automate client onboarding, vendor portals, automated PDF invoices, and interactive WhatsApp chat bots to eliminate manual bottlenecks.
+          </p>
+          <div class="bento-tech-tags">
+            <span>Client Portals</span><span>WhatsApp Bot</span><span>REST APIs</span>
+          </div>
+          <div class="bento-footer">
+            <div class="bento-price-box">
+              <span class="bento-price-label">Scope</span>
+              <span class="bento-price-val">Custom Quote</span>
+            </div>
+            <a href="#contact" onclick="selectServiceForContact('Custom Software & Automation')" class="btn btn-secondary btn-sm">
+              <span>Consult</span> <i>↗</i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Bento 6: Cataloging & Multi-Marketplace Scale (1 Col) -->
+        <div class="bento-card bento-span-1">
+          <div class="bento-top-badges">
+            <span class="bento-pill bento-pill-amber">📦 Marketplace</span>
+          </div>
+          <div class="bento-icon-lg">🏬</div>
+          <h3 class="bento-title">E-Commerce Cataloging & Multi-Channel</h3>
+          <p class="bento-desc">
+            High-converting A+ content, bullet benefit copywriting, professional product photography optimization, and Amazon/Flipkart listing synchronization.
+          </p>
+          <div class="bento-tech-tags">
+            <span>A+ Content</span><span>Flipkart Ads</span><span>Catalog Sync</span>
+          </div>
+          <div class="bento-footer">
+            <div class="bento-price-box">
+              <span class="bento-price-label">Starting</span>
+              <span class="bento-price-val">₹8,999</span>
+            </div>
+            <a href="#contact" onclick="selectServiceForContact('Cataloging & Store Setup')" class="btn btn-secondary btn-sm">
+              <span>Scale</span> <i>↗</i>
+            </a>
           </div>
         </div>
       </div>
@@ -531,6 +698,89 @@
     </div>
   </section>
 
+  <!-- Vertical Video Reels / Shorts Showcase -->
+  <section class="section" id="reels-showcase">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag" style="background: linear-gradient(135deg, rgba(131, 58, 180, 0.2), rgba(253, 29, 29, 0.2)); border-color: #fd1d1d; color: #ff758c;">🎥 Inside KioraTech Studio</span>
+        <h2 class="section-title">Watch Our Process in Motion</h2>
+        <p class="section-subtitle">
+          Real web architecture breakdowns, client store transformations, and conversion secrets straight from our official Instagram channel <strong><a href="https://www.instagram.com/kiora.tech/#" target="_blank" rel="noopener" style="color:var(--cyan-bright);text-decoration:underline;">@kiora.tech</a></strong>.
+        </p>
+      </div>
+
+      <div class="reels-grid">
+        <!-- Reel 1 -->
+        <div class="phone-reel-card">
+          <div class="phone-bezel">
+            <div class="phone-notch"><span class="notch-cam"></span></div>
+            <div class="phone-screen">
+              <video id="reel-video-1" class="reel-video" loop playsinline preload="metadata">
+                <source src="videos/reel1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <div class="reel-overlay">
+                <div class="reel-top-bar">
+                  <span class="reel-badge">🔥 WEB ARCHITECTURE</span>
+                  <button class="reel-sound-btn" data-video="reel-video-1" aria-label="Toggle Sound">🔇</button>
+                </div>
+                <div class="reel-play-center" data-video="reel-video-1">
+                  <span class="play-icon">▶</span>
+                </div>
+                <div class="reel-bottom-info">
+                  <div class="reel-author">
+                    <img src="images/logo.png" alt="KioraTech" class="reel-avatar">
+                    <span>@kiora.tech</span>
+                    <a href="https://www.instagram.com/kiora.tech/#" target="_blank" rel="noopener" class="reel-follow-btn">Follow</a>
+                  </div>
+                  <p class="reel-caption">How we engineer ultra-fast websites in 4 to 7 days with sub-second mobile speeds ⚡ #WebDevelopment #KioraTech</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="phone-card-footer">
+            <h4>Ultra-Fast Web Architecture (4–7 Days)</h4>
+            <a href="https://www.instagram.com/kiora.tech/#" target="_blank" rel="noopener" class="btn btn-sm btn-secondary">Watch on Instagram ↗</a>
+          </div>
+        </div>
+
+        <!-- Reel 2 -->
+        <div class="phone-reel-card">
+          <div class="phone-bezel">
+            <div class="phone-notch"><span class="notch-cam"></span></div>
+            <div class="phone-screen">
+              <video id="reel-video-2" class="reel-video" loop playsinline preload="metadata">
+                <source src="videos/reel2.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <div class="reel-overlay">
+                <div class="reel-top-bar">
+                  <span class="reel-badge">🛍️ D2C SCALING</span>
+                  <button class="reel-sound-btn" data-video="reel-video-2" aria-label="Toggle Sound">🔇</button>
+                </div>
+                <div class="reel-play-center" data-video="reel-video-2">
+                  <span class="play-icon">▶</span>
+                </div>
+                <div class="reel-bottom-info">
+                  <div class="reel-author">
+                    <img src="images/logo.png" alt="KioraTech" class="reel-avatar">
+                    <span>@kiora.tech</span>
+                    <a href="https://www.instagram.com/kiora.tech/#" target="_blank" rel="noopener" class="reel-follow-btn">Follow</a>
+                  </div>
+                  <p class="reel-caption">Shopify D2C store checkout secrets: How we reduce cart abandonment & scale orders! 🚀 #ShopifyD2C #ECommerce</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="phone-card-footer">
+            <h4>Shopify D2C Conversion Secrets</h4>
+            <a href="https://www.instagram.com/kiora.tech/#" target="_blank" rel="noopener" class="btn btn-sm btn-secondary">Watch on Instagram ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Dynamic Catalog & Packages (from Server) -->
   <section class="section" id="catalog">
     <div class="container">
@@ -560,120 +810,199 @@
         </p>
       </div>
 
+      <div class="calc-tabs-nav">
+        <button class="calc-tab-btn active" data-tab="tab-package-calc">📦 Package Cost Estimator</button>
+        <button class="calc-tab-btn" data-tab="tab-speed-roi">⚡ Speed & Revenue ROI Calculator</button>
+      </div>
+
       <div class="calculator-box">
-        <div class="calc-grid">
-          <!-- Options Side -->
-          <div class="calc-options-side">
-            <!-- Website Category -->
-            <div class="calc-group">
-              <h4>1. Select Website / Development Scope</h4>
-              <div class="calc-radio-group">
-                <div class="calc-radio-card calc-web-opt active" data-price="14999">
-                  <span class="title">Starter Website (5 pgs)</span>
-                  <span class="cost">₹14,999</span>
+        <!-- TAB 1: PACKAGE COST ESTIMATOR -->
+        <div class="calc-tab-pane active" id="tab-package-calc">
+          <div class="calc-grid">
+            <!-- Options Side -->
+            <div class="calc-options-side">
+              <!-- Website Category -->
+              <div class="calc-group">
+                <h4>1. Select Website / Development Scope</h4>
+                <div class="calc-radio-group">
+                  <div class="calc-radio-card calc-web-opt active" data-price="14999">
+                    <span class="title">Starter Website (5 pgs)</span>
+                    <span class="cost">₹14,999</span>
+                  </div>
+                  <div class="calc-radio-card calc-web-opt" data-price="29999">
+                    <span class="title">Business Website (10 pgs)</span>
+                    <span class="cost">₹29,999</span>
+                  </div>
+                  <div class="calc-radio-card calc-web-opt" data-price="54999">
+                    <span class="title">D2C E-Commerce Store</span>
+                    <span class="cost">₹54,999</span>
+                  </div>
+                  <div class="calc-radio-card calc-web-opt" data-price="0">
+                    <span class="title">No Website Needed</span>
+                    <span class="cost">₹0</span>
+                  </div>
                 </div>
-                <div class="calc-radio-card calc-web-opt" data-price="29999">
-                  <span class="title">Business Website (10 pgs)</span>
-                  <span class="cost">₹29,999</span>
+              </div>
+
+              <!-- Marketplace Scope -->
+              <div class="calc-group">
+                <h4>2. Select Amazon & Flipkart Handling</h4>
+                <div class="calc-radio-group">
+                  <div class="calc-radio-card calc-mkt-opt active" data-price="0">
+                    <span class="title">None</span>
+                    <span class="cost">₹0</span>
+                  </div>
+                  <div class="calc-radio-card calc-mkt-opt" data-price="11999">
+                    <span class="title">Single Channel (Amazon or Flipkart)</span>
+                    <span class="cost">₹11,999/mo</span>
+                  </div>
+                  <div class="calc-radio-card calc-mkt-opt" data-price="17999">
+                    <span class="title">Both Amazon + Flipkart Dual Handling</span>
+                    <span class="cost">₹17,999/mo</span>
+                  </div>
+                  <div class="calc-radio-card calc-mkt-opt" data-price="24999">
+                    <span class="title">Multi-Marketplace (+ Meesho/Shopify)</span>
+                    <span class="cost">₹24,999/mo</span>
+                  </div>
                 </div>
-                <div class="calc-radio-card calc-web-opt" data-price="54999">
-                  <span class="title">D2C E-Commerce Store</span>
-                  <span class="cost">₹54,999</span>
+              </div>
+
+              <!-- Marketing Scope -->
+              <div class="calc-group">
+                <h4>3. Select Digital Growth & SEO Scope</h4>
+                <div class="calc-radio-group">
+                  <div class="calc-radio-card calc-seo-opt active" data-price="0">
+                    <span class="title">None</span>
+                    <span class="cost">₹0</span>
+                  </div>
+                  <div class="calc-radio-card calc-seo-opt" data-price="9999">
+                    <span class="title">Local GMB Maps SEO</span>
+                    <span class="cost">₹9,999/mo</span>
+                  </div>
+                  <div class="calc-radio-card calc-seo-opt" data-price="16999">
+                    <span class="title">Performance SEO (Page 1 Target)</span>
+                    <span class="cost">₹16,999/mo</span>
+                  </div>
+                  <div class="calc-radio-card calc-seo-opt" data-price="15999">
+                    <span class="title">Social Media + Reels + Meta Ads</span>
+                    <span class="cost">₹15,999/mo</span>
+                  </div>
                 </div>
-                <div class="calc-radio-card calc-web-opt" data-price="0">
-                  <span class="title">No Website Needed</span>
-                  <span class="cost">₹0</span>
+              </div>
+
+              <!-- Add-ons -->
+              <div class="calc-group">
+                <h4>4. Optional Power-Ups</h4>
+                <div class="calc-checkboxes">
+                  <div class="calc-check-card calc-addon-check" data-price="4999">
+                    <span>🚀 Ultra Fast Delivery (Express Priority)</span>
+                    <span class="text-teal">+₹4,999</span>
+                  </div>
+                  <div class="calc-check-card calc-addon-check" data-price="7999">
+                    <span>🎨 Complete Brand Identity (Logo + Brand Book)</span>
+                    <span class="text-teal">+₹7,999</span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- Marketplace Scope -->
-            <div class="calc-group">
-              <h4>2. Select Amazon & Flipkart Handling</h4>
-              <div class="calc-radio-group">
-                <div class="calc-radio-card calc-mkt-opt active" data-price="0">
-                  <span class="title">None</span>
-                  <span class="cost">₹0</span>
-                </div>
-                <div class="calc-radio-card calc-mkt-opt" data-price="11999">
-                  <span class="title">Single Channel (Amazon or Flipkart)</span>
-                  <span class="cost">₹11,999/mo</span>
-                </div>
-                <div class="calc-radio-card calc-mkt-opt" data-price="17999">
-                  <span class="title">Both Amazon + Flipkart Dual Handling</span>
-                  <span class="cost">₹17,999/mo</span>
-                </div>
-                <div class="calc-radio-card calc-mkt-opt" data-price="24999">
-                  <span class="title">Multi-Marketplace (+ Meesho/Shopify)</span>
-                  <span class="cost">₹24,999/mo</span>
+            <!-- Summary Side -->
+            <div class="calc-summary-side">
+              <div>
+                <h4>Estimated Investment</h4>
+                <ul class="calc-summary-breakdown">
+                  <li><span>Original Value:</span> <del id="calc-original-amount">₹18,749</del></li>
+                  <li><span>KioraTech Package Discount:</span> <span class="text-teal">-20% Applied</span></li>
+                  <li><span>Estimated Turnaround:</span> <strong id="calc-delivery-time">5 - 7 Days</strong></li>
+                  <li><span>Payment Term:</span> <span>50% Advance / 50% on Delivery</span></li>
+                </ul>
+
+                <div class="calc-total-box">
+                  <div class="est-label">Total Estimated Investment</div>
+                  <div class="total-price" id="calc-total-amount">₹14,999</div>
+                  <div class="discount-note">✓ Includes 1 Year Free Domain/Hosting Consultation</div>
                 </div>
               </div>
-            </div>
 
-            <!-- Marketing Scope -->
-            <div class="calc-group">
-              <h4>3. Select Digital Growth & SEO Scope</h4>
-              <div class="calc-radio-group">
-                <div class="calc-radio-card calc-seo-opt active" data-price="0">
-                  <span class="title">None</span>
-                  <span class="cost">₹0</span>
-                </div>
-                <div class="calc-radio-card calc-seo-opt" data-price="9999">
-                  <span class="title">Local GMB Maps SEO</span>
-                  <span class="cost">₹9,999/mo</span>
-                </div>
-                <div class="calc-radio-card calc-seo-opt" data-price="16999">
-                  <span class="title">Performance SEO (Page 1 Target)</span>
-                  <span class="cost">₹16,999/mo</span>
-                </div>
-                <div class="calc-radio-card calc-seo-opt" data-price="15999">
-                  <span class="title">Social Media + Reels + Meta Ads</span>
-                  <span class="cost">₹15,999/mo</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Add-ons -->
-            <div class="calc-group">
-              <h4>4. Optional Power-Ups</h4>
-              <div class="calc-checkboxes">
-                <div class="calc-check-card calc-addon-check" data-price="4999">
-                  <span>🚀 Ultra Fast Delivery (Express Priority)</span>
-                  <span class="text-teal">+₹4,999</span>
-                </div>
-                <div class="calc-check-card calc-addon-check" data-price="7999">
-                  <span>🎨 Complete Brand Identity (Logo + Brand Book)</span>
-                  <span class="text-teal">+₹7,999</span>
-                </div>
+              <div>
+                <a href="#" id="calc-whatsapp-btn" target="_blank" rel="noopener" class="btn btn-primary pulse-btn" style="width: 100%; border-radius: var(--radius-md);">
+                  <span>Send Quote on WhatsApp</span> <i>💬</i>
+                </a>
+                <p style="font-size: 0.78rem; text-align: center; color: var(--text-muted); margin-top: 10px;">
+                  Instant reply within 15 minutes guaranteed.
+                </p>
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- Summary Side -->
-          <div class="calc-summary-side">
-            <div>
-              <h4>Estimated Investment</h4>
-              <ul class="calc-summary-breakdown">
-                <li><span>Original Value:</span> <del id="calc-original-amount">₹18,749</del></li>
-                <li><span>KioraTech Package Discount:</span> <span class="text-teal">-20% Applied</span></li>
-                <li><span>Estimated Turnaround:</span> <strong id="calc-delivery-time">5 - 7 Days</strong></li>
-                <li><span>Payment Term:</span> <span>50% Advance / 50% on Delivery</span></li>
-              </ul>
+        <!-- TAB 2: SPEED & REVENUE ROI CALCULATOR -->
+        <div class="calc-tab-pane" id="tab-speed-roi" style="display: none;">
+          <div class="calc-grid">
+            <div class="calc-options-side">
+              <div class="calc-group">
+                <div class="roi-slider-label">
+                  <span>Monthly Website / Store Visitors:</span>
+                  <strong id="roi-visitors-val" class="gradient-text">25,000 visitors</strong>
+                </div>
+                <input type="range" id="roi-visitors-slider" min="2000" max="200000" step="1000" value="25000" class="roi-range-slider">
+                <div class="slider-ticks"><span>2K</span><span>50K</span><span>100K</span><span>200K+</span></div>
+              </div>
 
-              <div class="calc-total-box">
-                <div class="est-label">Total Estimated Investment</div>
-                <div class="total-price" id="calc-total-amount">₹14,999</div>
-                <div class="discount-note">✓ Includes 1 Year Free Domain/Hosting Consultation</div>
+              <div class="calc-group">
+                <div class="roi-slider-label">
+                  <span>Average Order / Transaction Value (AOV):</span>
+                  <strong id="roi-aov-val" class="gradient-text">₹1,500</strong>
+                </div>
+                <input type="range" id="roi-aov-slider" min="300" max="15000" step="100" value="1500" class="roi-range-slider">
+                <div class="slider-ticks"><span>₹300</span><span>₹3,000</span><span>₹7,500</span><span>₹15,000+</span></div>
+              </div>
+
+              <div class="calc-group">
+                <div class="roi-slider-label">
+                  <span>Current Mobile Page Load Speed:</span>
+                  <strong id="roi-speed-val" style="color: #ef4444; font-weight: 700;">4.5 Seconds</strong>
+                </div>
+                <input type="range" id="roi-speed-slider" min="1.0" max="8.0" step="0.1" value="4.5" class="roi-range-slider">
+                <div class="slider-ticks"><span>1.0s (Fast)</span><span>3.5s (Average)</span><span>6.0s (Laggy)</span><span>8.0s (Critical)</span></div>
+              </div>
+
+              <div class="roi-benchmark-info">
+                <span>📊 Google Core Web Vitals Benchmark:</span> Every 1-second delay in page load time cuts mobile conversion rates by <strong>7%</strong> and spikes bounce rate by <strong>32%</strong>.
               </div>
             </div>
 
-            <div>
-              <a href="#" id="calc-whatsapp-btn" target="_blank" rel="noopener" class="btn btn-primary pulse-btn" style="width: 100%; border-radius: var(--radius-md);">
-                <span>Send Quote on WhatsApp</span> <i>💬</i>
-              </a>
-              <p style="font-size: 0.78rem; text-align: center; color: var(--text-muted); margin-top: 10px;">
-                Instant reply within 15 minutes guaranteed.
-              </p>
+            <!-- ROI Summary Side -->
+            <div class="calc-summary-side roi-summary-box">
+              <div>
+                <h4>Revenue Saved with KioraTech</h4>
+                <ul class="calc-summary-breakdown">
+                  <li><span>Target KioraTech Speed:</span> <strong style="color: #10b981;">0.8s Ultra-Fast ⚡</strong></li>
+                  <li><span>Speed Improvement:</span> <strong id="roi-speed-delta">3.7s Faster</strong></li>
+                  <li><span>Recovered Conversion Lift:</span> <strong id="roi-conv-lift" class="text-teal">+25.9%</strong></li>
+                </ul>
+
+                <div class="calc-total-box" style="background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.3);">
+                  <div class="est-label" style="color: #34d399;">Estimated Monthly Revenue Saved</div>
+                  <div class="total-price" id="roi-monthly-lift" style="color: #10b981;">₹97,125</div>
+                  <div class="discount-note" style="color: var(--text-secondary); margin-top: 6px;">
+                    💰 Annual Projected Gain: <strong id="roi-annual-lift" style="color: #38adb0;">₹11.65 Lakhs</strong>
+                  </div>
+                </div>
+
+                <div class="roi-payback-pill" style="margin-top: 14px; text-align: center; background: rgba(0, 240, 255, 0.1); border: 1px solid var(--border-focus); padding: 9px 12px; border-radius: var(--radius-sm); font-size: 0.88rem;">
+                  ⏱️ KioraTech Website Payback Period: <strong id="roi-payback-days" style="color: var(--cyan-bright);">Within 9 Days!</strong>
+                </div>
+              </div>
+
+              <div>
+                <a href="#" id="roi-whatsapp-btn" target="_blank" rel="noopener" class="btn btn-primary pulse-btn" style="width: 100%; border-radius: var(--radius-md);">
+                  <span>Claim Speed Audit on WhatsApp</span> <i>💬</i>
+                </a>
+                <p style="font-size: 0.78rem; text-align: center; color: var(--text-muted); margin-top: 10px;">
+                  Send this calculation directly to KioraTech for a complimentary technical audit.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -1038,6 +1367,17 @@
       <span>🤖</span>
       <div class="chatbot-unread-dot"></div>
     </button>
+  </div>
+
+  <!-- Social Proof Live Notification Toast Ticker -->
+  <div id="social-proof-toast" class="social-toast" role="status" aria-live="polite">
+    <div class="toast-avatar" id="toast-avatar">🚀</div>
+    <div class="toast-content">
+      <div class="toast-title" id="toast-title">Organic Sanjeevani Roots</div>
+      <div class="toast-text" id="toast-text">Achieved sub-1s load speed with 1-click WhatsApp checkout!</div>
+      <div class="toast-time" id="toast-time">Just now • Lucknow Verified Client</div>
+    </div>
+    <button class="toast-close" id="toast-close-btn" aria-label="Dismiss">✕</button>
   </div>
 
   <!-- Project Details / Case Study Modal -->
